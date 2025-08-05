@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owethu Peyane | Full Stack & AI Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fira Code', monospace;
+        }
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: black;
+        }
+
+        .project-image {
+            width: 100%;            
+            max-width: 100%;       
+            height: 200px;           
+            border-radius: 10px;    
+            object-fit: cover; 
+            border-radius: 10px;     
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+    <canvas id="matrix"></canvas>
+
+    <nav class="flex justify-between items-center p-6 bg-opacity-70 bg-black sticky top-0 z-50">
+        <h1 class="text-2xl font-bold text-green-400">Owethu Peyane</h1>
+        <ul class="flex gap-6">
+            <li><a href="#home" class="hover:text-green-400">Home</a></li>
+            <li><a href="#about" class="hover:text-green-400">About</a></li>
+            <li><a href="#projects" class="hover:text-green-400">Projects</a></li>
+            <li><a href="#certificates" class="hover:text-green-400">Certificates</a></li>
+            <li><a href="#contact" class="hover:text-green-400">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="text-center py-24">
+        <h2 class="text-4xl font-bold mb-4">Hi, I'm Owethu Peyane 👋</h2>
+        <p class="text-lg text-gray-300 max-w-xl mx-auto">Full Stack Developer | AI Enthusiast | Passionate about building smart, scalable, and secure solutions.</p>
+    </section>
+
+    <section id="about" class="px-6 py-12 bg-gray-900">
+        <h3 class="text-3xl font-semibold mb-4 text-green-400">About Me</h3>
+        <p class="text-gray-300 max-w-2xl">I specialize in full-stack web development, AI projects, and software testing. I enjoy turning complex problems into elegant, user-friendly solutions. Tech I use: JavaScript, Python, TailwindCSS, Node.js, MongoDB, and more.</p>
+    </section>
+
+    <section id="projects" class="px-6 py-12">
+    <h3 class="text-3xl font-semibold mb-6 text-green-400">Projects</h3>
+    
+    
+    <div class="flex gap-4 mb-6">
+        <button onclick="showProjects('myProjects')" class="tab-btn px-4 py-2 bg-green-600 text-white rounded">My Projects</button>
+        <button onclick="showProjects('aiBootcamp')" class="tab-btn px-4 py-2 bg-gray-600 text-white rounded">AI BootCamp</button>
+        <button onclick="showProjects('fnbProjects')" class="tab-btn px-4 py-2 bg-gray-600 text-white rounded">FNB App Academy</button>
+        <button onclick="showProjects('freeCodeCamp')" class="tab-btn px-4 py-2 bg-gray-600 text-white rounded">FreeCodeCamp</button>
+    </div>
+
+    <div id="myProjects" class="project-tab grid gap-6 md:grid-cols-2">
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Bloom&Blossom Flower Store</h4>
+            <img src="images/flowers1-4k.jpg" class="project-image"/>
+            <p class="text-gray-300">Node.js, Express, SQLite, TailwindCSS</p>
+            <a href="https://otty98.github.io/flower-ecommerce-store/" class="text-green-400 underline">View Demo</a>
+            <a href="https://github.com/otty98/flower-ecommerce-store.git" class="text-green-400 underline">View Code</a>
+        </div>
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Hangman Game</h4>
+            <img src="images/hangman.jpg" class="project-image">/>
+            <p class="text-gray-300">HTML, CSS and JavaScript</p>
+            <a href="https://otty98.github.io/hangman-game/" class="text-green-400 underline">View Demo</a>
+            <a href="https://github.com/otty98/hangman-game.git" class="text-green-400 underline">View Code</a>
+        </div>
+    </div>
+
+    <div id="aiBootcamp" class="project-tab grid gap-6 md:grid-cols-2 hidden">
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Crisis Negotiator AI</h4>
+            <p class="text-gray-300">LLM, Prompt Engineering</p>
+            <a href="#" class="text-green-400 underline">View Demo</a>
+        </div>
+    </div>
+
+    <div id="fnbProjects" class="project-tab grid gap-6 md:grid-cols-2 hidden">
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Contact Book Web App</h4>
+            <img src="images/contact-book.jpg" class="project-image">/>
+            <p class="text-gray-300">Vanilla HTML, CSS, and JavaScript using a RESTful backend</p>
+            <a href="https://github.com/otty98/fnb-contact-book.git" class="text-green-400 underline">View Code</a>
+        </div>
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Calculator</h4>
+            <img src="images/calculator2.png" class="project-image">/>
+            <p class="text-gray-300">HTML, CSS, and JavaScript</p>
+            <a href="https://github.com/otty98/fnb-app-calculator.git" class="text-green-400 underline">View Code</a>
+        </div>
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Pine City Zoo</h4>
+            <img src="images/calculator2.png" class="project-image">/>
+            <p class="text-gray-300">Vanilla HTML, CSS, and JavaScript using a RESTful backend</p>
+            <a href="https://github.com/otty98/fnb-contact-book.git" class="text-green-400 underline">View Code</a>
+        </div>
+    </div>
+
+    <div id="freeCodeCamp" class="project-tab grid gap-6 md:grid-cols-2 hidden">
+        <div class="bg-gray-800 p-4 rounded">
+            <h4 class="text-xl font-bold">Timestamp Microservice</h4>
+            <p class="text-gray-300">Vanilla HTML, CSS, and JavaScript using a RESTful backend</p>
+            <a href="#" class="text-green-400 underline">View Code</a>
+        </div>
+    </div>
+    </section>
+
+
+    <section id="certificates" class="px-6 py-12 bg-gray-900">
+        <h3 class="text-3xl font-semibold mb-6 text-green-400">Certificates</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-gray-800 p-4 border-l-4 border-green-400">
+                <h4 class="text-lg font-semibold">CAPACITI AI Bootcamp</h4>
+                <p class="text-gray-300">Issued 2025</p>
+                <a href="#" class="text-green-400 underline">View Certificate</a>
+            </div>
+            <div class="bg-gray-800 p-4 border-l-4 border-green-400">
+                <h4 class="text-lg font-semibold">FreeCodeCamp JavaScript</h4>
+                <p class="text-gray-300">Issued 2024</p>
+                <a href="#" class="text-green-400 underline">View Certificate</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="text-center py-12">
+        <h3 class="text-3xl font-semibold text-green-400">Let's Connect</h3>
+        <p class="text-gray-300 mt-4">Email: <a href="mailto:owethupeyane@email.com" class="underline text-green-400">owethupeyane@email.com</a></p>
+    </section>
+
+    <script>
+
+        // Matrix background
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        let letters = Array(256).join(1).split('');
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0,0,0,0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f0';
+            letters.map((y_pos, index) => {
+                const text = String.fromCharCode(3e4 + Math.random() * 33);
+                const x = index * 10;
+                ctx.fillText(text, x, y_pos);
+                letters[index] = y_pos > 758 + Math.random() * 1e4 ? 0 : y_pos + 10;
+            });
+        };
+        setInterval(draw, 33);
+    </script>
+    <script>
+    function showProjects(tabId) {
+        // Hide all tabs
+        document.querySelectorAll('.project-tab').forEach(tab => tab.classList.add('hidden'));
+
+        // Show selected tab
+        document.getElementById(tabId).classList.remove('hidden');
+
+        // Optional: update button styles
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('bg-green-600');
+            btn.classList.add('bg-gray-600');
+        });
+        event.target.classList.remove('bg-gray-600');
+        event.target.classList.add('bg-green-600');
+    }
+</script>
+
+</body>
+
+</html>
