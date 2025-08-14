@@ -34,10 +34,11 @@ body {
 
 /* Navigation */
 nav {
+    
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(14, 156, 109, 0.9);
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 2rem;
@@ -58,7 +59,7 @@ nav {
     position: absolute;
     top: 70px;
     right: 2rem;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(88, 83, 83, 0.95);
     padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -436,7 +437,7 @@ section {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
-    color: #00ff00;
+    color: #00FFAB;
 }
 
 .carousel-wrapper {
@@ -519,6 +520,21 @@ section {
 .carousel-prev:hover, .carousel-next:hover {
     background: rgba(0, 255, 0, 0.6);
 }
+
+.cert-side-by-side {
+    display: flex;
+    justify-content: center;  
+    align-items: flex-start; 
+    gap: 2rem;
+    flex-wrap: wrap;        
+    text-align: center;   
+}
+
+.cert-side-by-side .cert-section {
+    flex: 0 1 400px;          
+    max-width: 100%;
+}
+
 
 /* Contact Section Styling */
 .contact-section {
