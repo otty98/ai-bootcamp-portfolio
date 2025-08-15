@@ -62,12 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.project-filters .filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
     const aiDescription = document.getElementById('ai-description');
+    const fnbDescription = document.getElementById('fnb-description');
 
     // Initially hide all project cards and the description
     projectCards.forEach(card => card.style.display = 'none');
     if (aiDescription) {
         aiDescription.style.display = 'none';
     }
+    if (fnbDescription) {
+    fnbDescription.style.display = 'none';
+}
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -82,28 +86,40 @@ document.addEventListener('DOMContentLoaded', () => {
             if (aiDescription) {
                 aiDescription.style.display = 'none';
             }
+            if (fnbDescription) {
+            fnbDescription.style.display = 'none';
+            }
             
             // Show content based on the filter
             if (filter === 'all') {
                 projectCards.forEach(card => card.style.display = 'block');
             } else if (filter === 'ai') {
                 if (aiDescription) {
-                    aiDescription.style.display = 'block'; // Show the AI description
+                    aiDescription.style.display = 'block';
                 }
                 projectCards.forEach(card => {
                     if (card.getAttribute('data-category').includes(filter)) {
                         card.style.display = 'block';
                     }
                 });
-            } else {
-                projectCards.forEach(card => {
-                    if (card.getAttribute('data-category').includes(filter)) {
-                        card.style.display = 'block';
-                    }
-                });
+            } else if (filter === 'fnb') { 
+            if (fnbDescription) {
+                fnbDescription.style.display = 'block';
             }
-        });
+            projectCards.forEach(card => {
+                if (card.getAttribute('data-category').includes(filter)) {
+                    card.style.display = 'block';
+                }
+            });
+        } else {
+            projectCards.forEach(card => {
+                if (card.getAttribute('data-category').includes(filter)) {
+                    card.style.display = 'block';
+                }
+            });
+        }
     });
+});
 
     
     // Scroll animations
