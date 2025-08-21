@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game - Complete</title>
+    <style>
+        /* General game styling */
+        body {
+            background-color: #1e272e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f0f0f0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        /* Container for the entire game */
+        .game-container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 255, 171, 0.1);
+            max-width: 90%;
+            margin: 20px auto;
+        }
+
+        /* Heading styles */
+        h1 {
+            font-size: 2.5em;
+            color: #00FFAB;
+            margin-bottom: 20px;
+        }
+
+        /* Game options styling */
+        .game-options {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .level-select, .theme-select {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Button styling */
+        .game-btn, .theme-btn {
+            padding: 10px 20px;
+            border: 2px solid #00FFAB;
+            border-radius: 25px;
+            background: rgba(0, 255, 171, 0.1);
+            color: #00FFAB;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .game-btn:hover, .theme-btn:hover {
+            background: rgba(0, 255, 171, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .game-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .theme-btn.active {
+            background: #00FFAB;
+            color: #1e272e;
+        }
+
+        /* Game Board Grid */
+        #game-board {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        /* Memory card styling */
+        .memory-card {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            border: 2px solid #00FFAB;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .memory-card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .front-face, .back-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-size: 2.5em;
+        }
+
+        .back-face {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid #00FFAB;
+        }
+
+        .front-face {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        /* Game stats styling */
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00FFAB;
+        }
+
+        /* Button styling for win screen */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Celebration styles */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .balloon, .confetti {
+            position: absolute;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .balloon {
+            width: 20px;
+            height: 30px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .confetti {
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .win-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00FFAB;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            z-index: 1001;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .win-message h3 {
+            color: #00FFAB;
+            margin-top: 0;
+            font-size: 2em;
+        }
+
+        .win-options {
+            margin-top: 20px;
+        }
+
+        .leaderboard {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .leaderboard h4 {
+            color: #00FFAB;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .leaderboard p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        /* High score message */
+        .highscore-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Achievement notification */
+        .achievement-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid #00FFAB;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(400px);
+            transition: transform 0.5s ease;
+            max-width: 300px;
+        }
+
+        .achievement-notification.show {
+            transform: translateX(0);
+        }
+
+        .achievement-badge {
+            font-size: 2em;
+        }
+
+        .achievement-text h4 {
+            margin: 0;
+            color: #00FFAB;
+        }
+
+        .achievement-text p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+        }
+
+        /* Sparkle effect */
+        .sparkle-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #FFD700, #FFA500);
+            border-radius: 50%;
+            animation: sparkle 1s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .memory-card {
+                width: 80px;
+                height: 80px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .game-stats {
+                gap: 15px;
+            }
+
+            .stat-value {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Memory Game</h1>
+
+        <div class="game-options">
+            <div class="level-select">
+                <button class="game-btn" data-level="easy">Easy</button>
+                <button class="game-btn" data-level="medium" disabled>Medium</button>
+                <button class="game-btn" data-level="hard" disabled>Hard</button>
+            </div>
+            <div class="theme-select">
+                <button class="theme-btn active" data-theme="animals">Animals</button>
+                <button class="theme-btn" data-theme="fruits">Fruits</button>
+                <button class="theme-btn" data-theme="sports">Sports</button>
+            </div>
+        </div>
+
+        <div id="game-board" class="memory-game"></div>
+
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-label">Moves:</span>
+                <span id="moves" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Time:</span>
+                <span id="time" class="stat-value">0</span>
+            </div>
+            <div class="stat-item high-score">
+                <span class="stat-label">High Score:</span>
+                <span id="highscore" class="stat-value">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameBoard = document.getElementById('game-board');
+            const movesDisplay = document.getElementById('moves');
+            const timeDisplay = document.getElementById('time');
+            const levelButtons = document.querySelectorAll('.game-btn');
+            const highscoreDisplay = document.getElementById('highscore');
+
+            let cards = [];
+            let hasFlippedCard = false;
+            let lockBoard = false;
+            let firstCard, secondCard;
+            let moves = 0;
+            let timer;
+            let seconds = 0;
+            let matchedPairs = 0;
+            let currentLevel = null;
+
+            // Game levels
+            const levels = {
+                easy: { pairs: 8, cols: 4 },
+                medium: { pairs: 18, cols: 6 },
+                hard: { pairs: 32, cols: 8 }
+            };
+
+            // Define themes object with proper emoji encoding
+            const themes = {
+                animals: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🙈', '🙉', '🙊'],
+                fruits: ['🍎', '🍌', '🍓', '🍇', '🍉', '🍑', '🍒', '🍊', '🥝', '🥭', '🍍', '🍋', '🍊', '🥥', '🍈', '🍐', '🫐', '🥑'],
+                sports: ['⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🏉', '🥏', '🏓', '🏸', '🥊', '🥋', '⛷️', '🏂', '🏒', '🥅', '⛳', '🎯']
+            };
+            let currentTheme = 'animals';
+
+            // Initialize leaderboard and unlockedLevels
+            const leaderboard = {
+                easy: { moves: Infinity, time: Infinity },
+                medium: { moves: Infinity, time: Infinity },
+                hard: { moves: Infinity, time: Infinity }
+            };
+
+            const unlockedLevels = {
+                easy: true,
+                medium: false,
+                hard: false
+            };
+
+            const achievements = {
+                speedDemon: false,
+                memoryMaster: false,
+                perfectGame: false
+            };
+
+            // Load existing high scores
+            function loadHighScores() {
+                for (const level in leaderboard) {
+                    const storedMoves = localStorage.getItem(`memory-highscore-${level}-moves`);
+                    const storedTime = localStorage.getItem(`memory-highscore-${level}-time`);
+                    if (storedMoves !== null) {
+                        leaderboard[level].moves = parseInt(storedMoves);
+                    }
+                    if (storedTime !== null) {
+                        leaderboard[level].time = parseInt(storedTime);
+                    }
+                }
+            }
+
+            // Save high scores
+            function saveHighScores() {
+                for (const level in leaderboard) {
+                    if (leaderboard[level].moves !== Infinity) {
+                        localStorage.setItem(`memory-highscore-${level}-moves`, leaderboard[level].moves);
+                    }
+                    if (leaderboard[level].time !== Infinity) {
+                        localStorage.setItem(`memory-highscore-${level}-time`, leaderboard[level].time);
+                    }
+                }
+            }
+
+            // Update high score display
+            function updateHighScoreDisplay() {
+                if (currentLevel && leaderboard[currentLevel].moves !== Infinity) {
+                    highscoreDisplay.textContent = `${leaderboard[currentLevel].moves} moves in ${leaderboard[currentLevel].time}s`;
+                } else {
+                    highscoreDisplay.textContent = '-';
+                }
+            }
+
+            // Update level button states
+            function updateLevelButtonStates() {
+                document.querySelector('.game-btn[data-level="medium"]').disabled = !unlockedLevels.medium;
+                document.querySelector('.game-btn[data-level="hard"]').disabled = !unlockedLevels.hard;
+            }
+
+            // Initial load
+            loadHighScores();
+            updateLevelButtonStates();
+            updateHighScoreDisplay();
+
+            // Level button event listeners
+            levelButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const level = btn.dataset.level;
+                    if (unlockedLevels[level]) {
+                        currentLevel = level;
+                        startGame(levels[level]);
+                    }
+                });
+            });
+
+            function startGame(level) {
+                // Reset game state
+                clearInterval(timer);
+                seconds = 0;
+                moves = 0;
+                matchedPairs = 0;
+                updateStats();
+
+                // Clear existing elements
+                gameBoard.innerHTML = '';
+                removeCelebration();
+
+                // Create and shuffle cards
+                cards = createCards(level.pairs);
+                shuffleCards(cards);
+
+                // Setup board
+                gameBoard.style.gridTemplateColumns = `repeat(${level.cols}, 1fr)`;
+                cards.forEach(card => gameBoard.appendChild(card));
+
+                // Start timer
+                timer = setInterval(() => {
+                    seconds++;
+                    timeDisplay.textContent = seconds;
+                }, 1000);
+
+                updateHighScoreDisplay();
+            }
+
+            function createCards(pairs) {
+                const cards = [];
+                const selectedEmojis = themes[currentTheme].slice(0, pairs);
+                const cardValues = [...selectedEmojis, ...selectedEmojis];
+
+                cardValues.forEach(emoji => {
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    card.dataset.value = emoji;
+
+                    card.innerHTML = `
+                        <div class="back-face"></div>
+                        <div class="front-face">${emoji}</div>
+                    `;
+
+                    card.addEventListener('click', flipCard);
+                    cards.push(card);
+                });
+
+                return cards;
+            }
+
+            function shuffleCards(cards) {
+                cards.forEach(card => {
+                    card.style.order = Math.floor(Math.random() * cards.length);
+                });
+            }
+
+            function flipCard() {
+                if (lockBoard || this === firstCard || this.classList.contains('flip')) return;
+
+                this.classList.add('flip');
+
+                if (!hasFlippedCard) {
+                    hasFlippedCard = true;
+                    firstCard = this;
+                    return;
+                }
+
+                secondCard = this;
+                moves++;
+                updateStats();
+                checkForMatch();
+            }
+
+            function checkForMatch() {
+                const isMatch = firstCard.dataset.value === secondCard.dataset.value;
+                isMatch ? handleMatch() : handleMismatch();
+            }
+
+            function handleMatch() {
+                firstCard.removeEventListener('click', flipCard);
+                secondCard.removeEventListener('click', flipCard);
+                
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-effect';
+                sparkle.style.left = `${firstCard.offsetLeft + firstCard.offsetWidth / 2}px`;
+                sparkle.style.top = `${firstCard.offsetTop + firstCard.offsetHeight / 2}px`;
+                gameBoard.appendChild(sparkle);
+
+                setTimeout(() => sparkle.remove(), 1000);
+                matchedPairs++;
+                checkWinCondition();
+                resetBoard();
+            }
+
+            function handleMismatch() {
+                lockBoard = true;
+                setTimeout(() => {
+                    firstCard.classList.remove('flip');
+                    secondCard.classList.remove('flip');
+                    resetBoard();
+                }, 1000);
+            }
+
+            function resetBoard() {
+                [hasFlippedCard, lockBoard] = [false, false];
+                [firstCard, secondCard] = [null, null];
+            }
+
+            function updateStats() {
+                movesDisplay.textContent = moves;
+            }
+
+            function checkWinCondition() {
+                if (matchedPairs === cards.length / 2) {
+                    clearInterval(timer);
+
+                    // Update leaderboard
+                    if (moves < leaderboard[currentLevel].moves || (moves === leaderboard[currentLevel].moves && seconds < leaderboard[currentLevel].time)) {
+                        leaderboard[currentLevel].moves = moves;
+                        leaderboard[currentLevel].time = seconds;
+                        saveHighScores();
+                        showHighScoreMessage(moves, seconds);
+                    }
+
+                    // Check achievements
+                    checkAchievements();
+
+                    // Unlock next level
+                    if (currentLevel === 'easy' && !unlockedLevels.medium) {
+                        unlockedLevels.medium = true;
+                        updateLevelButtonStates();
+                    } else if (currentLevel === 'medium' && !unlockedLevels.hard) {
+                        unlockedLevels.hard = true;
+                        updateLevelButtonStates();
+                    }
+
+                    celebrateWin();
+                }
+            }
+
+            function showHighScoreMessage(score, time) {
+                const message = document.createElement('div');
+                message.className = 'highscore-message';
+                message.textContent = `New High Score for ${currentLevel} level: ${score} moves, ${time}s!`;
+                gameBoard.parentNode.insertBefore(message, gameBoard.nextSibling);
+                setTimeout(() => message.remove(), 3000);
+            }
+
+            function checkAchievements() {
+                if (seconds < 60 && !achievements.speedDemon) {
+                    achievements.speedDemon = true;
+                    showAchievement('Speed Demon', 'Completed a game in under 60 seconds!');
+                }
+
+                if (unlockedLevels.hard && !achievements.memoryMaster) {
+                    achievements.memoryMaster = true;
+                    showAchievement('Memory Master', 'Completed all difficulty levels!');
+                }
+
+                if (moves <= 2 * (cards.length / 2) && !achievements.perfectGame) {
+                    achievements.perfectGame = true;
+                    showAchievement('Perfect Game', 'Completed with no mismatched cards!');
+                }
+            }
+
+            function showAchievement(title, description) {
+                const achievement = document.createElement('div');
+                achievement.className = 'achievement-notification';
+                achievement.innerHTML = `
+                    <div class="achievement-badge">🏆</div>
+                    <div class="achievement-text">
+                        <h4>${title}</h4>
+                        <p>${description}</p>
+                    </div>
+                `;
+                document.body.appendChild(achievement);
+
+                setTimeout(() => {
+                    achievement.classList.add('show');
+                    setTimeout(() => {
+                        achievement.classList.remove('show');
+                        setTimeout(() => achievement.remove(), 500);
+                    }, 3000);
+                }, 100);
+            }
+
+            // Theme switching
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('theme-btn')) {
+                    currentTheme = e.target.dataset.theme;
+                    document.querySelectorAll('.theme-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+
+                    if (currentLevel) {
+                        startGame(levels[currentLevel]);
+                    }
+                }
+            });
+
+            function removeCelebration() {
+                const existingCelebration = document.querySelector('.celebration');
+                const existingMessage = document.querySelector('.win-message');
+                if (existingCelebration) existingCelebration.remove();
+                if (existingMessage) existingMessage.remove();
+            }
+
+            function celebrateWin() {
+                const celebration = document.createElement('div');
+                celebration.className = 'celebration';
+
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+                for (let i = 0; i < 150; i++) {
+                    const element = document.createElement('div');
+                    if (i < 50) {
+                        element.className = 'balloon';
+                        element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        element.style.animationDuration = `${4 + Math.random() * 3}s`;
+                    } else {
+                        element.className = 'confetti';
+                        element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        element.style.animationDuration = `${2 + Math.random() * 3}s`;
+                        element.style.width = `${5 + Math.random() * 10}px`;
+                        element.style.height = `${5 + Math.random() * 10}px`;
+                    }
+                    element.style.left = `${Math.random() * 100}%`;
+                    celebration.appendChild(element);
+                }
+
+                const messages = [
+                    "Amazing! 🎉", "Memory Master! 🏆", "Incredible! 👏",
+                    "Perfect! 🧠", "You nailed it! 💯", "Congratulations! 🎊",
+                ];
+
+                const winMessage = document.createElement('div');
+                winMessage.className = 'win-message';
+                winMessage.innerHTML = `
+                    <h3>${messages[Math.floor(Math.random() * messages.length)]}</h3>
+                    <p>Completed in ${moves} moves and ${seconds} seconds!</p>
+                    <div class="leaderboard">
+                        <h4>Best Scores</h4>
+                        <p>Easy: ${leaderboard.easy.moves === Infinity ? '-' : `${leaderboard.easy.moves} moves, ${leaderboard.easy.time}s`}</p>
+                        <p>Medium: ${leaderboard.medium.moves === Infinity ? '-' : `${leaderboard.medium.moves} moves, ${leaderboard.medium.time}s`}</p>
+                        <p>Hard: ${leaderboard.hard.moves === Infinity ? '-' : `${leaderboard.hard.moves} moves, ${leaderboard.hard.time}s`}</p>
+                    </div>
+                    <div class="win-options">
+                        <button class="btn play-again">Play Again</button>
+                        <button class="btn return-home">New Game</button>
+                    </div>
+                `;
+
+                document.body.append(celebration, winMessage);
+
+                document.querySelector('.play-again').addEventListener('click', () => {
+                    removeCelebration();
+                    startGame(levels[currentLevel]);
+                });
+
+                document.querySelector('.return-home').addEventListener('click', () => {
+                    removeCelebration();
+                    resetGameState();
+                });
+            }
+
+            function resetGameState() {
+                clearInterval(timer);
+                gameBoard.innerHTML = '';
+                cards = [];
+                hasFlippedCard = lockBoard = false;
+                firstCard = secondCard = null;
+                moves = seconds = matchedPairs = 0;
+                currentLevel = null;
+                movesDisplay.textContent = '0';
+                timeDisplay.textContent = '0';
+                updateHighScoreDisplay();
+            }
+        });
+    </script>
+</body>
+</html>

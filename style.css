@@ -277,6 +277,82 @@ section {
     font-size: 0.9rem;
 }
 
+/* Game Invitation Section */
+.game-invite {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
+}
+
+.game-invite h2 {
+    font-size: 2.5em;
+    color: #00FFAB;
+    margin-bottom: 10px;
+}
+
+.game-invite p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+.play-game-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Updated Pulse Lightning Effect */
+.play-game-btn.pulse-lightning {
+    color: #00FFAB;
+    text-shadow: 
+        0 0 5px #00FFAB,
+        0 0 10px #00FFAB;
+    animation: pulse-lightning-effect 2s infinite;
+}
+
+@keyframes pulse-lightning-effect {
+    0%, 100% {
+        text-shadow: 
+            0 0 5px #00FFAB,
+            0 0 10px #00FFAB,
+            0 0 15px #00FFAB;
+        transform: scale(1);
+        box-shadow: 
+            0 0 10px rgba(0, 255, 171, 0.3),
+            inset 0 0 10px rgba(0, 255, 171, 0.2);
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        text-shadow:
+            0 0 10px #00e699,
+            0 0 20px #00e699,
+            0 0 30px #00FFAB,
+            0 0 40px #00FFAB,
+            0 0 50px #00FFAB;
+        color: #fff;
+        transform: scale(1.05);
+        box-shadow:
+            0 0 20px rgba(0, 255, 171, 0.6),
+            0 0 40px rgba(0, 255, 171, 0.4),
+            inset 0 0 20px rgba(0, 255, 171, 0.3);
+        border-color: #00e699;
+        background: linear-gradient(135deg, #00FFAB 0%, #00e699 100%);
+    }
+}
+
 /* Projects Section */
 .projects {
     color: white;
@@ -524,15 +600,15 @@ section {
 
 .cert-side-by-side {
     display: flex;
-    justify-content: center;  
-    align-items: flex-start; 
+    justify-content: center;
+    align-items: flex-start;
     gap: 2rem;
-    flex-wrap: wrap;        
-    text-align: center;   
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .cert-side-by-side .cert-section {
-    flex: 0 1 400px;          
+    flex: 0 1 400px;
     max-width: 100%;
 }
 
@@ -542,7 +618,8 @@ section {
     padding: 60px 20px;
     background: rgba(0, 0, 0, 0.7);
     color: #f0f0f0;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-section h2 {
@@ -561,38 +638,11 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 1000px; /* This is essential for centering with flexbox */
+    width: 100%; /* Ensures the grid takes up available space */
     text-align: left;
 }
 
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #333;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    border-radius: 8px;
-    font-size: 1em;
-}
-
-.contact-form button {
-    background-color: #00FFAB;
-    color: #0d0d0d;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.contact-form button:hover {
-    background-color: #00e699;
-}
 
 .contact-info {
     padding: 20px;

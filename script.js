@@ -183,3 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Game Invitation Button Logic
+const playGameBtn = document.getElementById('play-game-btn');
+if (playGameBtn) {
+    playGameBtn.addEventListener('click', () => {
+        window.location.href = 'game.html';
+    });
+}
