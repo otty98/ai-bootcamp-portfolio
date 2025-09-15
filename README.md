@@ -1,2 +1,2 @@
 # ai-bootcamp-portfolio
-a portfolio that  showcases my AI bootcamp journey, including projects and certifications
+ https://otty98.github.io/ai-bootcamp-portfolio/
