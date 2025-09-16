@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawMatrix() {
         ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#00FFAB";
+        ctx.fillStyle = "#0066FF";
         ctx.font = fontSize + "px monospace";
 
         drops.forEach((y, i) => {
