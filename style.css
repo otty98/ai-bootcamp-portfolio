@@ -237,6 +237,29 @@ section {
     }
 }
 
+/* Style for the downward arrow */
+.scroll-down-arrow {
+    font-size: 3rem;
+    color: #0066FF;
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.7);
+    margin-top: 2rem;
+    cursor: pointer;
+    animation: bounce 2s infinite; /* Apply the animation */
+}
+
+/* Keyframe animation for the bounce effect */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
 /* About Section */
 .about {
     background: rgba(0, 0, 0, 0.2);
@@ -557,9 +580,8 @@ section {
     object-fit: contain;
 }
 
-/* Base Certification Section Styles */
 .cert-section {
-    padding: 2rem 0;
+    padding: 4rem 0;
     margin-bottom: 0;
     color: white;
     text-align: center;
@@ -570,28 +592,84 @@ section {
     align-items: center;
     border-top: 1px solid rgba(0, 102, 255, 0.2);
     width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Animated Background Pattern */
+.cert-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 102, 255, 0.03) 0%,
+        transparent 50%
+    );
+    animation: backgroundShift 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes backgroundShift {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Advanced Section Heading */
 .cert-section h3 {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #0066FF;
-    text-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
     padding: 0 1rem;
     width: 100%;
+    position: relative;
+    z-index: 2;
+    
+    /* Gradient Text Effect */
+    background: linear-gradient(135deg, #0066FF 0%, #4da6ff 50%, #80bfff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    text-shadow: 0 0 30px rgba(0, 102, 255, 0.5);
+    padding-bottom: 0.5rem;
 }
 
-/* Carousel Wrapper */
+/* Animated Underline */
+.cert-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #0066FF, transparent);
+    animation: underlineExpand 2s ease-in-out infinite alternate;
+    z-index: 2;
+}
+
+@keyframes underlineExpand {
+    0% { width: 0%; }
+    100% { width: 60%; }
+}
+
+/* 3D Container with Perspective */
 .carousel-wrapper {
+    perspective: 1000px;
     position: relative;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 2rem 1rem;
+    z-index: 2;
 }
 
-/* Carousel Container */
+/* Carousel Container with Floating Animation */
 .carousel-container {
     display: flex;
     overflow-x: auto;
@@ -603,77 +681,207 @@ section {
     width: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    animation: float 6s ease-in-out infinite;
 }
 
 .carousel-container::-webkit-scrollbar {
     display: none;
 }
 
-/* Certificate Cards */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Enhanced Certificate Cards with Modern Effects */
 .cert-card {
     position: relative;
     scroll-snap-align: start;
     flex: 0 0 auto;
     width: 350px;
     height: 250px;
-    border: 1px solid rgba(0, 102, 255, 0.4);
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+    cursor: pointer;
+    
+    /* Modern Glass Morphism Effect */
+    background: rgba(0, 102, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    
+    /* Advanced Shadow System */
+    box-shadow: 
+        0 8px 32px rgba(0, 102, 255, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Smooth Transitions */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
 }
 
+/* 3D Hover Effects */
 .cert-card:hover {
-    border-color: rgba(0, 102, 255, 0.8);
-    box-shadow: 0 15px 30px rgba(0, 102, 255, 0.4);
-    transform: translateY(-5px);
+    transform: 
+        translateY(-15px) 
+        rotateX(5deg) 
+        rotateY(5deg) 
+        scale(1.02);
+    
+    box-shadow: 
+        0 25px 50px rgba(0, 102, 255, 0.25),
+        0 15px 35px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    border-color: rgba(0, 102, 255, 0.6);
 }
 
+/* Image with Advanced Effects */
 .cert-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all 0.4s ease;
+    filter: brightness(0.9) contrast(1.1);
 }
 
+.cert-card:hover img {
+    filter: brightness(1.1) contrast(1.2) saturate(1.1);
+    transform: scale(1.05);
+}
+
+/* Modern Gradient Overlay */
+.cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 102, 255, 0.1) 0%,
+        rgba(0, 102, 255, 0.05) 50%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cert-card:hover::before {
+    opacity: 1;
+}
+
+/* Animated Border Effect */
+.cert-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, 
+        transparent, 
+        #0066FF, 
+        transparent, 
+        #4da6ff, 
+        transparent);
+    border-radius: 22px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    animation: borderRotate 3s linear infinite;
+}
+
+.cert-card:hover::after {
+    opacity: 1;
+}
+
+@keyframes borderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Overlay with Backdrop Blur */
 .cert-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 102, 255, 0.1));
+    
+    /* Advanced Gradient */
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 102, 255, 0.3) 50%,
+        transparent 100%
+    );
+    
+    backdrop-filter: blur(10px);
     color: white;
-    padding: 1rem;
+    padding: 1.5rem;
     transform: translateY(100%);
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 2;
 }
 
 .cert-card:hover .cert-overlay {
     transform: translateY(0);
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 102, 255, 0.4) 70%,
+        rgba(0, 102, 255, 0.1) 100%
+    );
 }
 
-/* Carousel Navigation */
+/* Typography Enhancement */
+.cert-overlay p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Modern Navigation Buttons */
 .carousel-nav {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    z-index: 2;
+    position: relative;
 }
 
 .carousel-prev, .carousel-next {
-    background: rgba(0, 102, 255, 0.3);
-    border: 1px solid rgba(0, 102, 255, 0.5);
+    background: linear-gradient(135deg, 
+        rgba(0, 102, 255, 0.2) 0%, 
+        rgba(0, 102, 255, 0.4) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 102, 255, 0.3);
     color: white;
-    padding: 0.5rem 1rem;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 
+        0 8px 25px rgba(0, 102, 255, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-prev:hover, .carousel-next:hover {
-    background: rgba(0, 102, 255, 0.6);
-    box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
-    transform: scale(1.1);
+    background: linear-gradient(135deg, 
+        rgba(0, 102, 255, 0.4) 0%, 
+        rgba(0, 102, 255, 0.7) 100%);
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 
+        0 15px 35px rgba(0, 102, 255, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Side-by-side certifications */
@@ -686,6 +894,8 @@ section {
     text-align: center;
     width: 100%;
     margin-top: 3rem;
+    z-index: 2;
+    position: relative;
 }
 
 .cert-side-by-side .cert-section {
@@ -693,13 +903,37 @@ section {
     max-width: 100%;
     border-top: none;
     padding: 1rem 0;
+    background: none;
+}
+
+/* Stagger Animation for Cards */
+.cert-card:nth-child(1) { animation-delay: 0s; }
+.cert-card:nth-child(2) { animation-delay: 0.1s; }
+.cert-card:nth-child(3) { animation-delay: 0.2s; }
+.cert-card:nth-child(4) { animation-delay: 0.3s; }
+.cert-card:nth-child(5) { animation-delay: 0.4s; }
+
+/* TABLET RESPONSIVE STYLES */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cert-card {
+        width: 320px;
+        height: 230px;
+    }
+    
+    .cert-section h3 {
+        font-size: 2.2rem;
+    }
+    
+    .carousel-wrapper {
+        padding: 1.5rem 1rem;
+    }
 }
 
 /* MOBILE RESPONSIVE STYLES */
 @media (max-width: 768px) {
     /* Section adjustments */
     .cert-section {
-        padding: 1rem 0;
+        padding: 2rem 0;
         min-height: auto;
     }
     
@@ -713,9 +947,10 @@ section {
     
     /* Carousel wrapper adjustments */
     .carousel-wrapper {
-        padding: 0 0.5rem;
+        padding: 1rem 0.5rem;
         width: 100%;
         overflow: hidden;
+        perspective: 800px;
     }
     
     /* Certificate cards mobile adjustments */
@@ -723,6 +958,11 @@ section {
         width: 280px;
         height: 200px;
         flex-shrink: 0;
+    }
+    
+    /* Simplified mobile hover effects */
+    .cert-card:hover {
+        transform: translateY(-8px) scale(1.01);
     }
     
     /* Side by side layout for mobile */
@@ -743,13 +983,94 @@ section {
     
     /* Navigation buttons mobile adjustments */
     .carousel-nav {
-        margin-top: 0.5rem;
+        margin-top: 1rem;
         gap: 0.5rem;
     }
     
     .carousel-prev, .carousel-next {
-        padding: 0.4rem 0.8rem;
-        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    /* Reduce animation intensity on mobile */
+    .carousel-container {
+        animation: none;
+    }
+}
+
+/* EXTRA SMALL MOBILE SCREENS */
+@media (max-width: 480px) {
+    .cert-section {
+        padding: 1.5rem 0;
+    }
+    
+    .cert-section h3 {
+        font-size: 1.5rem;
+        padding: 0 0.25rem;
+    }
+    
+    .cert-card {
+        width: 260px;
+        height: 180px;
+    }
+    
+    .carousel-wrapper {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .cert-side-by-side .cert-section h3 {
+        font-size: 1.4rem;
+    }
+    
+    .cert-overlay {
+        padding: 1rem;
+    }
+    
+    .cert-overlay p {
+        font-size: 0.8rem;
+    }
+}
+
+/* ACCESSIBILITY IMPROVEMENTS */
+@media (prefers-reduced-motion: reduce) {
+    .cert-card,
+    .cert-overlay,
+    .carousel-prev,
+    .carousel-next,
+    .carousel-container {
+        animation: none;
+        transition: none;
+    }
+    
+    .cert-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .cert-section::before {
+        animation: none;
+    }
+    
+    .cert-section h3::after {
+        animation: none;
+        width: 60%;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+    .cert-card {
+        border: 2px solid #0066FF;
+        background: rgba(0, 0, 0, 0.9);
+    }
+    
+    .cert-overlay {
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .cert-section h3 {
+        color: #4da6ff;
+        text-shadow: none;
     }
 }
 
