@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owethu Peyane - Certifications</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000000;
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Navigation styling */
+        nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .home-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid #0066FF;
+            color: #0066FF;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-btn:hover {
+            background: rgba(0, 102, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
+            color: white;
+        }
+
+        .home-btn::before {
+            content: "←";
+            font-weight: bold;
+        }
+
+        /* Full Certifications Page */
+        .certifications-page {
+            padding-top: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .certifications-page h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #0066FF;
+            text-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
+        }
+
+        /* Styles for the filter buttons */
+        .cert-filters {
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid #0066FF;
+            color: #0066FF;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0, 102, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
+        }
+
+        .filter-btn.active {
+            background: #0066FF;
+            color: white;
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.6);
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        .cert-item {
+            display: block;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 102, 255, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+            height: 250px;
+        }
+
+        .cert-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.4);
+        }
+
+        .cert-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Class to hide certificates */
+        .certs-grid .cert-item.hidden {
+            display: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .certifications-page h2 {
+                font-size: 2rem;
+            }
+            
+            .certs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .cert-item {
+                height: 200px;
+            }
+            
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .home-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cert-item {
+                max-width: 100%;
+                height: 180px;
+            }
+            
+            .cert-filters {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .home-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div class="background">
+        <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
+    </div>
+
+        <nav>
+            <a href="index.html" class="home-btn">Back to Home</a>
+        </nav>
+
+    <section id="certifications" class="certifications-page fade-in">
+        <div class="container">
+            <h2>My Certifications</h2>
+            
+            <div class="cert-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="ai">AI</button>
+                <button class="filter-btn" data-category="professional-development">Professional Development</button>
+                <button class="filter-btn" data-category="software-development">Software Development</button>
+            </div>
+
+            <div class="certs-grid">
+                <!-- AI Certs -->
+                <a href="AI-bootcamp/AI Chatbot without coding-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/AI Chatbot without coding-page-00001.jpg" alt="AI Chatbot Cert">
+                </a>
+                
+                <a href="AI-bootcamp/Ai Essentials-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Ai Essentials-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/Ai for Everyone-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Ai for Everyone-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/AI Microsoft-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/AI Microsoft-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/GenAI for Everyone-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/GenAI for Everyone-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/GenAI with Large Lang-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/GenAI with Large Lang-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/Intro to AI-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Intro to AI-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/Intro to GenAI-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Intro to GenAI-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/Python for Data Science-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Python for Data Science-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/Responsible AI-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Responsible AI-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+                <a href="AI-bootcamp/Trusworthy AI-page-00001.jpg" class="cert-item" data-category="ai" target="_blank">
+                    <img src="AI-bootcamp/Trusworthy AI-page-00001.jpg" alt="AI Essentials Cert">
+                </a>
+
+                <!-- Professional Development Certs -->
+                <a href="professional-dev/Emotionsl Intelligence-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Emotionsl Intelligence-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Financial Plannin-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Financial Plannin-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Finding Your Professional Voice-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Finding Your Professional Voice-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Grid and Growth Mindset-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Grid and Growth Mindset-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Interpersonal Skills-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Interpersonal Skills-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Job Interview Prep-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Job Interview Prep-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Leading with Impact-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Leading with Impact-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Managing Conflict-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Managing Conflict-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Negotiation Skills-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Negotiation Skills-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Peronal Branding-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Peronal Branding-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Possitive Psycology-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Possitive Psycology-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Problem Solving-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Problem Solving-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Psycho of the Self-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Psycho of the Self-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Time Management-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Time Management-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Verbal Communication-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Verbal Communication-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+                <a href="professional-dev/Write Prof Email-page-00001.jpg" class="cert-item" data-category="professional-development" target="_blank">
+                    <img src="professional-dev/Write Prof Email-page-00001.jpg" alt="Professional Development Cert">
+                </a>
+
+                <!-- Software Dev Certs -->
+                <a href="freecodecamp/Screenshot (33).png" class="cert-item" data-category="software-development" target="_blank">
+                    <img src="freecodecamp/Screenshot (33).png" alt="Software Development Cert">
+                </a>
+                <a href="fnb/IMG_6582.jpeg" class="cert-item" data-category="software-development" target="_blank">
+                    <img src="fnb/IMG_6582.jpeg" alt="Software Development Cert">
+                </a>
+
+                </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const certs = document.querySelectorAll('.cert-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove 'active' class from all buttons and add to the clicked one
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const category = button.dataset.category;
+
+                certs.forEach(cert => {
+                    const certCategory = cert.dataset.category;
+                    
+                    if (category === 'all' || certCategory === category) {
+                        cert.classList.remove('hidden');
+                    } else {
+                        cert.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>

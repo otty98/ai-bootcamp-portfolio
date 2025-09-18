@@ -11,6 +11,10 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* Matrix Binary Background - Enhanced for deeper black */
 .background {
     position: fixed;
@@ -329,6 +333,36 @@ section {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
 }
+
+/* What I am Currently Learning Section */
+.learning {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 102, 255, 0.2);
+    text-align: center;
+    color: white;
+}
+
+.learning-content {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.learning-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #0066FF;
+    text-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+}
+
+.learning-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
 
 /* Game Invitation Section */
 .game-invite {

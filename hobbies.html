@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owethu Peyane - Hobbies</title>
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #000000;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dynamic Matrix Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 102, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundFlow 25s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes backgroundFlow {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Modern Hobbies Page Section */
+        .hobbies-page {
+            padding: 8rem 0 4rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated particles background */
+        .hobbies-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(0, 102, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(77, 166, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(0, 102, 255, 0.4), transparent);
+            animation: particleFloat 30s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+
+        /* Advanced Section Title */
+        .hobbies-page .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            
+            /* Gradient text effect */
+            background: linear-gradient(135deg, #0066FF 0%, #4da6ff 50%, #80bfff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            
+            text-shadow: 0 0 30px rgba(0, 102, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        /* Animated title underline */
+        .hobbies-page .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #0066FF, transparent);
+            animation: titleUnderline 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleUnderline {
+            0% { width: 0%; }
+            100% { width: 80%; }
+        }
+
+        .hobbies-page .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 2;
+            line-height: 1.8;
+        }
+
+        /* Modern Grid Layout */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            justify-content: center;
+            align-items: stretch;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Advanced Hobby Cards */
+        .hobby-card {
+            position: relative;
+            background: rgba(0, 102, 255, 0.08);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 25px;
+            padding: 2.5rem;
+            
+            /* Advanced shadow system */
+            box-shadow: 
+                0 15px 35px rgba(0, 102, 255, 0.15),
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        /* 3D hover effects */
+        .hobby-card:hover {
+            transform: translateY(-15px) rotateX(2deg) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(0, 102, 255, 0.25),
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 102, 255, 0.6);
+        }
+
+        /* Gradient overlay on hover */
+        .hobby-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 102, 255, 0.1) 0%,
+                rgba(0, 102, 255, 0.05) 50%,
+                rgba(0, 0, 0, 0.1) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        .hobby-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Animated border effect */
+        .hobby-card::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, 
+                transparent, 
+                #0066FF, 
+                transparent, 
+                #4da6ff, 
+                transparent);
+            border-radius: 27px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .hobby-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Modern Header Design */
+        .hobby-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hobby-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 10px #0066FF);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hobby-card:hover .hobby-icon {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 15px #4da6ff);
+        }
+
+        .hobby-title {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #0066FF 0%, #4da6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .hobby-card:hover .hobby-title {
+            text-shadow: 0 0 20px rgba(0, 102, 255, 0.8);
+        }
+
+        .hobby-card p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Media Players */
+        .spotify-player,
+        .netflix-player {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .spotify-player:hover,
+        .netflix-player:hover {
+            background: rgba(0, 102, 255, 0.1);
+            border-color: rgba(0, 102, 255, 0.4);
+            transform: scale(1.01);
+        }
+
+        .spotify-header,
+        .netflix-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .spotify-logo,
+        .netflix-logo {
+            width: 28px;
+            height: 28px;
+            fill: #1DB954;
+            transition: all 0.3s ease;
+        }
+
+        .netflix-logo {
+            fill: #E50914;
+        }
+
+        .spotify-player:hover .spotify-logo {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px #1DB954);
+        }
+
+        .netflix-player:hover .netflix-logo {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px #E50914);
+        }
+
+        .spotify-header h4,
+        .netflix-header h4 {
+            font-size: 1.3rem;
+            color: #0066FF;
+            margin-bottom: 0.5rem;
+        }
+
+        .spotify-header p,
+        .netflix-header p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        /* Enhanced Shows Grid */
+        .shows-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .show-item {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .show-item:hover {
+            background: rgba(0, 102, 255, 0.08);
+            border-color: rgba(0, 102, 255, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.2);
+        }
+
+        .show-item h5 {
+            font-size: 1.3rem;
+            color: #0066FF;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(0, 102, 255, 0.5);
+        }
+
+        .show-item p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Enhanced iframe styling */
+        iframe {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        iframe:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.2);
+        }
+
+        /* Floating animation for the entire grid */
+        .hobbies-grid {
+            animation: gentleFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Stagger animations for cards */
+        .hobby-card:nth-child(1) {
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hobby-card:nth-child(2) {
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .hobby-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hobbies-page {
+                padding: 6rem 0 2rem;
+            }
+            
+            .hobbies-page .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .hobbies-page .subtitle {
+                font-size: 1rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hobby-card {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+            
+            .hobby-card:hover {
+                transform: translateY(-8px) scale(1.01);
+            }
+            
+            .hobby-icon {
+                font-size: 2.5rem;
+            }
+            
+            .hobby-title {
+                font-size: 1.6rem;
+            }
+            
+            .spotify-player,
+            .netflix-player {
+                padding: 1rem;
+                border-radius: 15px;
+            }
+            
+            iframe[height="352"] {
+                height: 250px;
+            }
+            
+            iframe[height="200"] {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hobbies-page .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hobby-card {
+                padding: 1.2rem;
+                margin: 0 0.5rem;
+            }
+            
+            .hobby-header {
+                gap: 1rem;
+            }
+            
+            .hobby-icon {
+                font-size: 2rem;
+            }
+            
+            .hobby-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            .hobby-card:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Navigation styling */
+        nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .home-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid #0066FF;
+            color: #0066FF;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-btn:hover {
+            background: rgba(0, 102, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
+            color: white;
+        }
+
+        .home-btn::before {
+            content: "←";
+            font-weight: bold;
+        }
+
+        /* HIGH CONTRAST MODE */
+        @media (prefers-contrast: high) {
+            .hobby-card {
+                border: 2px solid #0066FF;
+                background: rgba(0, 0, 0, 0.9);
+            }
+            
+            .spotify-player,
+            .netflix-player {
+                background: rgba(0, 0, 0, 0.95);
+                border: 2px solid #0066FF;
+            }
+        }
+
+        /* Fade in effect */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="home-btn">Back to Home</a>
+    </nav>
+    <section id="hobbies" class="hobbies-page fade-in">
+        <div class="container">
+            <h2 class="section-title">Beyond Code</h2>
+            <p class="subtitle">When I'm not debugging or building applications, here's what keeps me inspired and balanced.</p>
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <div class="hobby-header">
+                        <span class="hobby-icon">🎵</span>
+                        <h3 class="hobby-title">Music Vibes</h3>
+                    </div>
+                    <p>Music fuels my creativity and keeps me focused during long coding sessions. I do not have a specific genre, here's what's currently on repeat:</p>
+                    <div class="spotify-player">
+                        <div class="spotify-header">
+                            <svg class="spotify-logo" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.84-.6 0-.359.24-.66.54-.78 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.242 1.021zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.481.78.241 1.2zm.120-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56z"/>
+                            </svg>
+                            <div>
+                                <h4>Everyday Playlist</h4>
+                                <p>My go-to beats to get me through the day</p>
+                            </div>
+                        </div>
+                        <div class="spotify-embed">
+                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1NRBIJH6Zr62oLcEN6wBa7?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="spotify-player">
+                        <div class="spotify-header">
+                            <svg class="spotify-logo" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.84-.6 0-.359.24-.66.54-.78 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.242 1.021zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.481.78.241 1.2zm.120-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56z"/>
+                                
+                            </svg>
+                            <div>
+                                <h4>Coding Flow Playlist</h4>
+                                <p>My go-to beats for productive sessions</p>
+                            </div>
+                        </div>
+                        <div class="spotify-embed">
+                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWZqd5JICZI0u?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hobby-card">
+                    <div class="hobby-header">
+                        <span class="hobby-icon">🎬</span>
+                        <h3 class="hobby-title">Binge Watching</h3>
+                    </div>
+                    <p>Great storytelling inspires great code. Here are my current Netflix obsessions:</p>
+                    <div class="netflix-player">
+                        <div class="netflix-header">
+                            <svg class="netflix-logo" viewBox="0 0 24 24" fill="white">
+                                <path d="M5.398 0v.6l8.112 14.128V24l2.954-8.972 7.536-15.028h-3.077L15.21 8.432 9.397.001z"/>
+                                <path d="M5.398 0l6.077 9.614V0z"/>
+                            </svg>
+                            <div>
+                                <h4>Currently Watching</h4>
+                                <p>Some Of My Favorites</p>
+                            </div>
+                        </div>
+                        <div class="shows-grid">
+                            <div class="show-item">
+                                <h5>🚀 Young Sheldon</h5>
+                                <p>Heartwarming comedy that reminds me of my own childhood</p>
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PZjouxK0h8g" title="Young Sheldon Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="show-item">
+                                <h5>💻 The Knight Agent</h5>
+                                <p>Tech dystopia that hits different as a developer</p>
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/YDbnY9Obsfs" title="Stranger Things Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <div class="show-item">
+                                <h5>Acrimony</h5>
+                                <p>Drama that keeps you on the edge of your seat</p>
+                                <iframe width="100%" height="200" src="https://www.youtube.com/embed/wlpunOUxYSo" title="Acrimony Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="show-item">
+                                <h5>🏆 The Rookie</h5>
+                                <p>Inspiring story of a rookie cop chasing his dreams</p>
+                                <iframe width="100%" height="200" src="https://www.YouTube.com/embed/8BPlx6eK1vc" title="The Rookie Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for fade-in effects
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeInElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Add click interactions for hobby cards
+            const hobbyCards = document.querySelectorAll('.hobby-card');
+            hobbyCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on iframe
+                    if (e.target.tagName !== 'IFRAME') {
+                        this.style.transform = 'translateY(-20px) rotateX(5deg) scale(1.03)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 300);
+                    }
+                });
+            });
+
+            // Enhanced iframe hover effects
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                iframe.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.boxShadow = '0 8px 25px rgba(0, 102, 255, 0.3)';
+                });
+                
+                iframe.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
