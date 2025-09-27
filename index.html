@@ -43,8 +43,8 @@
 
             </div>
             <div class="hero-buttons">
-                <a href="documents/Owethu_Peyane_CV.pdf" class="btn btn-primary" download>Download CV</a>
-                <a href="documents/Owethu_Peyane_CV.pdf" class="btn btn-secondary" target="_blank">View CV</a>
+                <a href="documents/Owethu Peyane CV.pdf" class="btn btn-primary" download>Download CV</a>
+                <a href="documents/Owethu Peyane CV.pdf" class="btn btn-secondary" target="_blank">View CV</a>
             </div>
             <a href="#about" class="scroll-down-link">
                 <div class="scroll-down-arrow">
@@ -62,7 +62,7 @@
                     <img src="images/WhatsApp Image 2025-07-09 at 21.03.52 (1).jpeg" alt="Profile" class="profile-img">
                 </div>
                 <div class="about-text">
-                    <h2>About Me</h2>
+                    <h2 class="animated-heading section-title about-title">About Me</h2>
                     <p>I'm a software developer and QA enthusiast with a strong foundation in Java and Python.
                         I have experience building full-stack and API-driven applications.
                         I recently completed an intensive AI bootcamp where I gained practical
@@ -95,10 +95,10 @@
     <section id="learning" class="learning fade-in">
         <div class="container">
             <div class="learning-content">
-                <h2>What I am Currently Learning</h2>
+                <h2 class="animated-heading section-title">What I am Currently Learning</h2>
                 <p>I'm always expanding my skills to stay at the forefront of technology. Here are some of the topics I am currently exploring and practicing with:</p>
                 <div class="skills-grid">
-                    <div class="skill-tag">React (IBM)</div>
+                    <div class="skill-tag">Angular</div>
                     <div class="skill-tag">Docker (IBM)</div>
                     <div class="skill-tag">Cloud Computing (AWS/Azure)</div>
                     <div class="skill-tag">Data Engineering (WeThinkCode_)</div>
@@ -114,7 +114,7 @@
 
     <section id="game-invite" class="game-invite fade-in">
         <div class="container">
-            <h2>Wanna Play a Game?</h2>
+            <h2 class="animated-heading section-title">Wanna Play a Game?</h2>
             <img src="GIF/hello-sticker.gif" alt="Robot animation" style="width: 300px; display: block; margin: 20px auto;">
             <p>Don't get bored reading about me, let's have some fun!</p>
             <button id="play-game-btn" class="btn play-game-btn pulse-lightning">Let's Play!</button>
@@ -131,146 +131,149 @@
     <!-- Projects Section -->
     <section id="projects" class="projects fade-in">
         <div class="container">
-            <h2>My Projects</h2>
+            <h2 class="animated-heading section-title projects-title">My Projects</h2>
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="ai">AI/ML</button>
                 <button class="filter-btn" data-filter="software">Personal</button>
                 <button class="filter-btn" data-filter="fnb">FNB Academy</button>
             </div>
-            
 
-            <div id="ai-description" style="display: none;">
-                <p>My journey into artificial intelligence began with an intensive
-                    AI Bootcamp that provided a robust foundation in both
-                    theoretical and practical applications of modern AI.
-                    The curriculum focused heavily on Generative AI and Machine Learning,
-                    where I gained hands-on experience with models for natural language
-                    processing, computer vision, and machine learning.
-                    A core component of this training was ethical AI development,
-                    which involved auditing models for bias and developing mitigation strategies. 
-                    Through various projects, I learned to build and deploy real-world AI applications, 
-                    including custom content generators, chatbots, and AI-powered data analytics tools. 
-                    This bootcamp equipped me with the skills to not only build intelligent systems but to do so responsibly</p>
+            <!-- Category Descriptions -->
+            <div id="ai-description" class="category-description">
+                <p>My journey into artificial intelligence began with an intensive AI Bootcamp that provided a robust foundation in both theoretical and practical applications of modern AI. The curriculum focused heavily on Generative AI and Machine Learning, where I gained hands-on experience with models for natural language processing, computer vision, and machine learning. A core component of this training was ethical AI development, which involved auditing models for bias and developing mitigation strategies. Through various projects, I learned to build and deploy real-world AI applications, including custom content generators, chatbots, and AI-powered data analytics tools. This bootcamp equipped me with the skills to not only build intelligent systems but to do so responsibly.</p>
             </div>
-            <div id="fnb-description" style="display: none;">
-                <p>The FNB App Academy was a free, fully online coding programme aimed at empowering tech aspirants — from absolute beginners
-                    to aspiring developers — across Africa. It ran for nine weeks and covered core competencies like app development, UX design, 
-                    backend integration (API), and business fundamentals.</p>
+            <div id="fnb-description" class="category-description">
+                <p>The FNB App Academy was a free, fully online coding programme aimed at empowering tech aspirants — from absolute beginners to aspiring developers — across Africa. It ran for nine weeks and covered core competencies like app development, UX design, backend integration (API), and business fundamentals.</p>
             </div>
-            <!-- AI/ML Projects -->
+
             <div class="projects-grid">
+                <!-- AI/ML Projects -->
                 <div class="project-card" data-category="ai">
-                    <h3>AI Chatbot Training</h3>
-                    <p>This project is a full-stack, AI-powered educational chatbot designed to help users learn about Artificial Intelligence and related topics.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">React, Vite, CSS</span>
-                        <span class="project-tag">Flask, Python</span>
-                        <span class="project-tag">Flask-CORS</span>
+                    <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=400&h=220&fit=crop" alt="AI Chatbot" class="project-image">
+                    <div class="project-content">
+                        <h3>AI Chatbot Training</h3>
+                        <p>This project is a full-stack, AI-powered educational chatbot designed to help users learn about Artificial Intelligence and related topics.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Vite</span>
+                            <span class="project-tag">Flask</span>
+                            <span class="project-tag">Python</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <!-- <a href="#certification" class="project-link">View Certs</a> -->
-                        <a href="demos/Vite + React - Google Chrome 2025-08-13 10-12-25.mp4"class="project-link">View Demo</a>
-                        <img src="images/chatbot-with-smartphone_78370-9415.jpg" style="border-radius: 30px;" alt="Flowers Screenshot">
+                </div>
+
+                <div class="project-card" data-category="ai">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=220&fit=crop" alt="AI Resume Builder" class="project-image">
+                    <div class="project-content">
+                        <h3>AI Resume Builder</h3>
+                        <p>This is a web application that helps you create and manage your resume. You can upload an existing CV to automatically extract information and generate a professional summary with AI assistance.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">Express</span>
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="project-card" data-category="ai">
-                <h3>AI Resume Builder</h3>
-                <p>This is a web application that helps you create and manage your resume. You can upload an existing CV to automatically extract information, generate a professional summary with the help of an AI, and build or edit your resume using a simple form.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Node.js & Express</span>
-                    <span class="project-tag">Python(parser.py)</span>
-                    <span class="project-tag">MongoDB</span>
-                    <span class="project-tag">HTML, CSS, & JavaScript</span>
-                    
+                <div class="project-card" data-category="ai">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=220&fit=crop" alt="Sentiment Analyzer" class="project-image">
+                    <div class="project-content">
+                        <h3>AI Sentiment Analyzer</h3>
+                        <p>SentimentScope is a full-stack application designed to analyze the sentiment of text inputs using advanced machine learning models.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">Hugging Face</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <!-- <a href="#certification" class="project-link">View Certs</a> -->
-                    <a href="demos/AI Resume Builder - Google Chrome 2025-08-13 14-03-22.mp4" class="project-link">View Demo</a>
-                    <img src="images/artificial-intelligence-online-resume_23-2150360371.jpg" style="border-radius: 30px;" alt="Flowers Screenshot">
-                </div>
-            </div>
-
-            <div class="project-card" data-category="ai">
-                <h3>AI Sentiment Analyzer</h3>
-                <p>SentimentScope is a full-stack application designed to analyze the sentiment of text inputs.</p>
-                <div class="project-tags">
-                    <span class="project-tag">HTML, CSS, and JavaScrip</span>
-                    <span class="project-tag">Node.js</span>
-                    <span class="project-tag">Hugging Face Inference API</span>
-                </div>
-                <div class="project-links">
-                    <!-- <a href="#certification" class="project-link">View Certs</a> -->
-                    <a href="demos/SentimentScope _ AI-Powered Text Analysis - Google Chrome 2025-08-13 15-09-19.mp4" class="project-link">View Demo</a>
-                    <img src="images/sentiment.jpg" style="border-radius: 30px;" alt="Flowers Screenshot">
-                </div>
-            </div>
 
                 <!-- Software Projects -->
                 <div class="project-card" data-category="software">
-                    <h3>Bloom & Blossom Flower Store</h3>
-                    <p>An ecormmerce store that sells only flowers with
-                        <br/> kinds of fully functional Payment Gateways.</p>
-                    
-                    <div class="project-tags">
-                        <span class="project-tag">HTML/CSS</span>
-                        <span class="project-tag">JavaScript</span>
-                        <span class="project-tag">Node.js + Express</span>
-                        <span class="project-tag">SQLite</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="demos/Bloom & Blossom - Premium Flower Delivery - Google Chrome 2025-08-14 09-44-13.mp4" class="project-link" target="_blank">View Demo</a>
-                        <a href="https://otty98.github.io/flower-ecommerce-store/" class="project-link" target="_blank">Launch Store</a>
-                        <img src="images/flowerrrrr.jpg" alt="Flowers Screenshot">
+                    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=220&fit=crop" alt="Flower Store" class="project-image">
+                    <div class="project-content">
+                        <h3>Bloom & Blossom Flower Store</h3>
+                        <p>An e-commerce store that sells only flowers with fully functional payment gateways and modern shopping experience.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML/CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">SQLite</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">Launch Store</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="project-card" data-category="software">
-                    <h3>Hangman Game</h3>
-                    <p>A modern, interactive hangman game built with HTML, CSS, and JavaScript. Guess the word letter by letter before the hangman is fully drawn!</p>
-                    <div class="project-tags">
-                        <span class="project-tag">HTML/CSS</span>
-                        <span class="project-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="demos/Hangman Game - Google Chrome 2025-08-14 09-50-26.mp4" class="project-link" target="_blank">View Demo</a>
-                        <a href="https://otty98.github.io/hangman-game/" class="project-link" target="_blank">Play Game</a>
-                        <img src="images/hangmannn.png"  alt="Hangman Screenshot">
+                    <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f79e?w=400&h=220&fit=crop" alt="Hangman Game" class="project-image">
+                    <div class="project-content">
+                        <h3>Hangman Game</h3>
+                        <p>A modern, interactive hangman game built with HTML, CSS, and JavaScript. Guess the word letter by letter before the hangman is fully drawn!</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML/CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">Play Game</a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- FNB Academy Projects -->
                 <div class="project-card" data-category="fnb">
-                    <h3>Calculator</h3>
-                    <div class="project-tags">
-                        <span class="project-tag">HTML5</span>
-                        <span class="project-tag">CSS3</span>
-                        <span class="project-tag">JavaScript (Vanilla JS)</span>
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=220&fit=crop" alt="Calculator" class="project-image">
+                    <div class="project-content">
+                        <h3>Calculator</h3>
+                        <p>A sleek and functional calculator application built with vanilla JavaScript, featuring a modern interface and smooth animations.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="demos/Simple Calculator - Google Chrome 2025-08-14 09-54-55.mp4" class="project-link">View Demo</a>
-                        <img src="images/black-calculator-isolated-on-a-transparent-background-png.webp" alt="Calculator Screenshot">
                 </div>
-                    </div>
 
                 <div class="project-card" data-category="fnb">
-                    <h3>Contact Book</h3>
-                    
-                    <div class="project-tags">
-                        <span class="project-tag">HTML</span>
-                        <span class="project-tag">CSS</span>
-                        <span class="project-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="demos/Add Contact - Google Chrome 2025-08-14 09-12-46.mp4" class="project-link">View Demo</a>
-                        <img src="images/contactB.png" alt="Contact Book Screenshot">
+                    <img src="https://images.unsplash.com/photo-1512428813834-c702c7702b75?w=400&h=220&fit=crop" alt="Contact Book" class="project-image">
+                    <div class="project-content">
+                        <h3>Contact Book</h3>
+                        <p>A comprehensive contact management application that allows users to add, edit, delete, and search through their contacts with ease.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">View Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
-
     <section id="certification" class="cert-section fade-in">
         <div class="container">
             <h3>Certifications</h3>
@@ -291,7 +294,7 @@
 
     <section id="contact" class="contact-section fade-in">
         <div class="container">
-            <h2>Get in Touch</h2>
+            <h2 class="animated-heading section-title contact-title">Get in Touch</h2>
             <p>I'm currently seeking new opportunities and challenges. If you have a project or an offer you'd like to discuss, feel free to get in touch!</p>
             
             <div class="contact-grid">

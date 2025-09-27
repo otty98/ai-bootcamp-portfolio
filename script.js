@@ -58,20 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Project filtering logic
+
+    // Project filtering logic (compatible with your existing code)
     const filterButtons = document.querySelectorAll('.project-filters .filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
     const aiDescription = document.getElementById('ai-description');
     const fnbDescription = document.getElementById('fnb-description');
 
-    // Initially hide all project cards and the description
+    // Initially hide all project cards and descriptions
     projectCards.forEach(card => card.style.display = 'none');
     if (aiDescription) {
         aiDescription.style.display = 'none';
     }
     if (fnbDescription) {
-    fnbDescription.style.display = 'none';
-}
+        fnbDescription.style.display = 'none';
+    }
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -87,44 +88,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 aiDescription.style.display = 'none';
             }
             if (fnbDescription) {
-            fnbDescription.style.display = 'none';
+                fnbDescription.style.display = 'none';
             }
             
             // Show content based on the filter
             if (filter === 'all') {
-                projectCards.forEach(card => card.style.display = 'block');
+                projectCards.forEach(card => {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease-out';
+                });
             } else if (filter === 'ai') {
                 if (aiDescription) {
                     aiDescription.style.display = 'block';
                 }
                 projectCards.forEach(card => {
-                    if (card.getAttribute('data-category').includes(filter)) {
+                    if (card.getAttribute('data-category') === filter) {
                         card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.5s ease-out';
                     }
                 });
             } else if (filter === 'fnb') { 
-            if (fnbDescription) {
-                fnbDescription.style.display = 'block';
+                if (fnbDescription) {
+                    fnbDescription.style.display = 'block';
+                }
+                projectCards.forEach(card => {
+                    if (card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.5s ease-out';
+                    }
+                });
+            } else {
+                projectCards.forEach(card => {
+                    if (card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.5s ease-out';
+                    }
+                });
             }
-            projectCards.forEach(card => {
-                if (card.getAttribute('data-category').includes(filter)) {
-                    card.style.display = 'block';
-                }
-            });
-        } else {
-            projectCards.forEach(card => {
-                if (card.getAttribute('data-category').includes(filter)) {
-                    card.style.display = 'block';
-                }
-            });
-        }
+        });
     });
-});
 
     
-    // Scroll animations
+    // Scroll animations (your existing code)
     const sections = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries, observer) => {
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("visible");
@@ -136,7 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     sections.forEach(section => {
-        observer.observe(section);
+        scrollObserver.observe(section);
+    });
+
+    // Add smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
 
     // Certification carousel functionality
