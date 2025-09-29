@@ -352,429 +352,368 @@
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Memory Game</h1>
+  <div class="game-container">
+    <h1>Memory Game</h1>
 
-        <div class="game-options">
-            <div class="level-select">
-                <button class="game-btn" data-level="easy">Easy</button>
-                <button class="game-btn" data-level="medium" disabled>Medium</button>
-                <button class="game-btn" data-level="hard" disabled>Hard</button>
-            </div>
-            <div class="theme-select">
-                <button class="theme-btn active" data-theme="animals">Animals</button>
-                <button class="theme-btn" data-theme="fruits">Fruits</button>
-                <button class="theme-btn" data-theme="sports">Sports</button>
-            </div>
-        </div>
-
-        <div id="game-board" class="memory-game"></div>
-
-        <div class="game-stats">
-            <div class="stat-item">
-                <span class="stat-label">Moves:</span>
-                <span id="moves" class="stat-value">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Time:</span>
-                <span id="time" class="stat-value">0</span>
-            </div>
-            <div class="stat-item high-score">
-                <span class="stat-label">High Score:</span>
-                <span id="highscore" class="stat-value">-</span>
-            </div>
-        </div>
-        <a href="javascript:history.back()" class="home-btn">Back</a>
+    <div class="game-options">
+      <div class="level-select">
+        <button class="game-btn" data-level="easy">Easy</button>
+        <button class="game-btn" data-level="medium" disabled>Medium</button>
+        <button class="game-btn" data-level="hard" disabled>Hard</button>
+      </div>
+      <div class="theme-select">
+        <button class="theme-btn active" data-theme="animals">Animals</button>
+        <button class="theme-btn" data-theme="fruits">Fruits</button>
+        <button class="theme-btn" data-theme="sports">Sports</button>
+      </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const gameBoard = document.getElementById('game-board');
-            const movesDisplay = document.getElementById('moves');
-            const timeDisplay = document.getElementById('time');
-            const levelButtons = document.querySelectorAll('.game-btn');
-            const highscoreDisplay = document.getElementById('highscore');
+    <div id="game-board" class="memory-game"></div>
 
-            let cards = [];
-            let hasFlippedCard = false;
-            let lockBoard = false;
-            let firstCard, secondCard;
-            let moves = 0;
-            let timer;
-            let seconds = 0;
-            let matchedPairs = 0;
-            let currentLevel = null;
+    <div class="game-stats">
+      <div class="stat-item">
+        <span class="stat-label">Moves:</span>
+        <span id="moves" class="stat-value">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Time:</span>
+        <span id="time" class="stat-value">0</span>
+      </div>
+      <div class="stat-item high-score">
+        <span class="stat-label">High Score:</span>
+        <span id="highscore" class="stat-value">-</span>
+      </div>
+    </div>
+    <a href="index.html" class="home-btn">Back</a>
+  </div>
 
-            // Game levels
-            const levels = {
-                easy: { pairs: 8, cols: 4 },
-                medium: { pairs: 15, cols: 5 },
-                hard: { pairs: 18, cols: 6 }
-            };
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const gameBoard = document.getElementById('game-board');
+      const movesDisplay = document.getElementById('moves');
+      const timeDisplay = document.getElementById('time');
+      const levelButtons = document.querySelectorAll('.game-btn');
+      const highscoreDisplay = document.getElementById('highscore');
 
-            // Define themes object with proper emoji encoding
-            const themes = {
-                animals: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🙈', '🙉', '🙊'],
-                fruits: ['🍎', '🍌', '🍓', '🍇', '🍉', '🍑', '🍒', '🍊', '🥝', '🥭', '🍍', '🍋', '🍊', '🥥', '🍈', '🍐', '🫐', '🥑'],
-                sports: ['⚽', '🏀', '🏈', '⚾', '🎾', '🏐', '🏉', '🥏', '🏓', '🏸', '🥊', '🥋', '⛷️', '🏂', '🏒', '🥅', '⛳', '🎯']
-            };
-            let currentTheme = 'animals';
+      let cards = [];
+      let hasFlippedCard = false;
+      let lockBoard = false;
+      let firstCard, secondCard;
+      let moves = 0;
+      let timer;
+      let seconds = 0;
+      let matchedPairs = 0;
+      let mismatches = 0;
+      let currentLevel = null;
 
-            // Initialize leaderboard and unlockedLevels
-            const leaderboard = {
-                easy: { moves: Infinity, time: Infinity },
-                medium: { moves: Infinity, time: Infinity },
-                hard: { moves: Infinity, time: Infinity }
-            };
+      // Game levels
+      const levels = {
+        easy: { pairs: 8, cols: 4 },
+        medium: { pairs: 15, cols: 5 },
+        hard: { pairs: 18, cols: 6 }
+      };
 
-            const unlockedLevels = {
-                easy: true,
-                medium: false,
-                hard: false
-            };
+      // Themes 
+      const themes = {
+        animals: ['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🙈','🙉','🙊'],
+        fruits: ['🍎','🍌','🍓','🍇','🍉','🍑','🍒','🥝','🥭','🍍','🍋','🥥','🍈','🍐','🫐','🥑'],
+        sports: ['⚽','🏀','🏈','⚾','🎾','🏐','🏉','🥏','🏓','🏸','🥊','🥋','⛷️','🏂','🏒','🥅','⛳','🎯']
+      };
+      let currentTheme = 'animals';
 
-            const achievements = {
-                speedDemon: false,
-                memoryMaster: false,
-                perfectGame: false
-            };
+      // Leaderboard (saved in localStorage)
+      const leaderboard = {
+        easy: { moves: Infinity, time: Infinity },
+        medium: { moves: Infinity, time: Infinity },
+        hard: { moves: Infinity, time: Infinity }
+      };
 
-            // Load existing high scores
-            function loadHighScores() {
-                for (const level in leaderboard) {
-                    const storedMoves = localStorage.getItem(`memory-highscore-${level}-moves`);
-                    const storedTime = localStorage.getItem(`memory-highscore-${level}-time`);
-                    if (storedMoves !== null) {
-                        leaderboard[level].moves = parseInt(storedMoves);
-                    }
-                    if (storedTime !== null) {
-                        leaderboard[level].time = parseInt(storedTime);
-                    }
-                }
-            }
+      // Level unlock tracking
+      const unlockedLevels = {
+        easy: true,
+        medium: false,
+        hard: false
+      };
 
-            // Save high scores
-            function saveHighScores() {
-                for (const level in leaderboard) {
-                    if (leaderboard[level].moves !== Infinity) {
-                        localStorage.setItem(`memory-highscore-${level}-moves`, leaderboard[level].moves);
-                    }
-                    if (leaderboard[level].time !== Infinity) {
-                        localStorage.setItem(`memory-highscore-${level}-time`, leaderboard[level].time);
-                    }
-                }
-            }
+      // Achievements
+      const achievements = {
+        speedDemon: false,
+        memoryMaster: false,
+        perfectGame: false
+      };
 
-            // Update high score display
-            function updateHighScoreDisplay() {
-                if (currentLevel && leaderboard[currentLevel].moves !== Infinity) {
-                    highscoreDisplay.textContent = `${leaderboard[currentLevel].moves} moves in ${leaderboard[currentLevel].time}s`;
-                } else {
-                    highscoreDisplay.textContent = '-';
-                }
-            }
+      // Load existing high scores
+      function loadHighScores() {
+        for (const level in leaderboard) {
+          const storedMoves = localStorage.getItem(`memory-highscore-${level}-moves`);
+          const storedTime = localStorage.getItem(`memory-highscore-${level}-time`);
+          if (storedMoves !== null) leaderboard[level].moves = parseInt(storedMoves);
+          if (storedTime !== null) leaderboard[level].time = parseInt(storedTime);
+        }
+      }
 
-            // Update level button states
-            function updateLevelButtonStates() {
-                document.querySelector('.game-btn[data-level="medium"]').disabled = !unlockedLevels.medium;
-                document.querySelector('.game-btn[data-level="hard"]').disabled = !unlockedLevels.hard;
-            }
+      function saveHighScores() {
+        for (const level in leaderboard) {
+          if (leaderboard[level].moves !== Infinity) {
+            localStorage.setItem(`memory-highscore-${level}-moves`, leaderboard[level].moves);
+          }
+          if (leaderboard[level].time !== Infinity) {
+            localStorage.setItem(`memory-highscore-${level}-time`, leaderboard[level].time);
+          }
+        }
+      }
 
-            // Initial load
-            loadHighScores();
-            updateLevelButtonStates();
-            updateHighScoreDisplay();
+      function updateHighScoreDisplay() {
+        if (currentLevel && leaderboard[currentLevel].moves !== Infinity) {
+          highscoreDisplay.textContent = `${leaderboard[currentLevel].moves} moves in ${leaderboard[currentLevel].time}s`;
+        } else {
+          highscoreDisplay.textContent = '-';
+        }
+      }
 
-            // Level button event listeners
-            levelButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const level = btn.dataset.level;
-                    if (unlockedLevels[level]) {
-                        currentLevel = level;
-                        startGame(levels[level]);
-                    }
-                });
-            });
+      function updateLevelButtonStates() {
+        document.querySelector('.game-btn[data-level="medium"]').disabled = !unlockedLevels.medium;
+        document.querySelector('.game-btn[data-level="hard"]').disabled = !unlockedLevels.hard;
+      }
 
-            function startGame(level) {
-                // Reset game state
-                clearInterval(timer);
-                seconds = 0;
-                moves = 0;
-                matchedPairs = 0;
-                updateStats();
+      // Initial load
+      loadHighScores();
+      updateLevelButtonStates();
+      updateHighScoreDisplay();
 
-                // Clear existing elements
-                gameBoard.innerHTML = '';
-                removeCelebration();
+      // Level buttons
+      levelButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const level = btn.dataset.level;
+          if (unlockedLevels[level]) {
+            currentLevel = level;
+            startGame(levels[level]);
+          }
+        });
+      });
 
-                // Create and shuffle cards
-                cards = createCards(level.pairs);
-                shuffleCards(cards);
+      function startGame(level) {
+        // Reset game state
+        clearInterval(timer);
+        seconds = 0;
+        moves = 0;
+        matchedPairs = 0;
+        mismatches = 0;
+        updateStats();
 
-                // Setup board
-                gameBoard.style.gridTemplateColumns = `repeat(${level.cols}, 1fr)`;
-                cards.forEach(card => gameBoard.appendChild(card));
+        gameBoard.innerHTML = '';
+        removeCelebration();
 
-                // Start timer
-                timer = setInterval(() => {
-                    seconds++;
-                    timeDisplay.textContent = seconds;
-                }, 1000);
+        cards = createCards(level.pairs);
+        shuffleArray(cards);
 
+        gameBoard.style.gridTemplateColumns = `repeat(${level.cols}, 1fr)`;
+        cards.forEach(card => gameBoard.appendChild(card));
+
+        timer = setInterval(() => {
+          seconds++;
+          timeDisplay.textContent = seconds;
+        }, 1000);
+
+        updateHighScoreDisplay();
+      }
+
+      function createCards(pairs) {
+        const cards = [];
+        const selectedEmojis = themes[currentTheme].slice(0, pairs);
+        const cardValues = [...selectedEmojis, ...selectedEmojis];
+
+        cardValues.forEach(emoji => {
+          const card = document.createElement('div');
+          card.className = 'memory-card';
+          card.dataset.value = emoji;
+          card.innerHTML = `
+            <div class="back-face"></div>
+            <div class="front-face">${emoji}</div>
+          `;
+          card.addEventListener('click', flipCard);
+          cards.push(card);
+        });
+        return cards;
+      }
+
+      // Fisher-Yates shuffle
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function flipCard() {
+        if (lockBoard || this === firstCard || this.classList.contains('flip')) return;
+        this.classList.add('flip');
+
+        if (!hasFlippedCard) {
+          hasFlippedCard = true;
+          firstCard = this;
+          return;
+        }
+
+        secondCard = this;
+        moves++;
+        updateStats();
+        checkForMatch();
+      }
+
+      function checkForMatch() {
+        const isMatch = firstCard.dataset.value === secondCard.dataset.value;
+        isMatch ? handleMatch() : handleMismatch();
+      }
+
+      function handleMatch() {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+        matchedPairs++;
+        checkWinCondition();
+        resetBoard();
+      }
+
+      function handleMismatch() {
+        lockBoard = true;
+        mismatches++;
+        setTimeout(() => {
+          firstCard.classList.remove('flip');
+          secondCard.classList.remove('flip');
+          resetBoard();
+        }, 1000);
+      }
+
+      function resetBoard() {
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+      }
+
+      function updateStats() {
+        movesDisplay.textContent = moves;
+      }
+
+        function checkWinCondition() {
+            if (matchedPairs === cards.length / 2) {
+            clearInterval(timer);
+
+            if (moves < leaderboard[currentLevel].moves || (moves === leaderboard[currentLevel].moves && seconds < leaderboard[currentLevel].time)) {
+                leaderboard[currentLevel].moves = moves;
+                leaderboard[currentLevel].time = seconds;
+                saveHighScores();
                 updateHighScoreDisplay();
             }
 
-            function createCards(pairs) {
-                const cards = [];
-                const selectedEmojis = themes[currentTheme].slice(0, pairs);
-                const cardValues = [...selectedEmojis, ...selectedEmojis];
+            checkAchievements();
 
-                cardValues.forEach(emoji => {
-                    const card = document.createElement('div');
-                    card.className = 'memory-card';
-                    card.dataset.value = emoji;
-
-                    card.innerHTML = `
-                        <div class="back-face"></div>
-                        <div class="front-face">${emoji}</div>
-                    `;
-
-                    card.addEventListener('click', flipCard);
-                    cards.push(card);
-                });
-
-                return cards;
+            // Fix: Check and unlock next level properly
+            if (currentLevel === 'easy' && !unlockedLevels.medium) {
+                unlockedLevels.medium = true;
+                updateLevelButtonStates();
+            }
+            if (currentLevel === 'medium' && !unlockedLevels.hard) {
+                unlockedLevels.hard = true;
+                updateLevelButtonStates();
             }
 
-            function shuffleCards(cards) {
-                cards.forEach(card => {
-                    card.style.order = Math.floor(Math.random() * cards.length);
-                });
+            celebrateWin();
+            }
+        }
+
+        function checkAchievements() {
+            if (seconds < 60 && !achievements.speedDemon) {
+            achievements.speedDemon = true;
+            showAchievement('Speed Demon', 'Completed a game in under 60 seconds!');
             }
 
-            function flipCard() {
-                if (lockBoard || this === firstCard || this.classList.contains('flip')) return;
-
-                this.classList.add('flip');
-
-                if (!hasFlippedCard) {
-                    hasFlippedCard = true;
-                    firstCard = this;
-                    return;
-                }
-
-                secondCard = this;
-                moves++;
-                updateStats();
-                checkForMatch();
+            if (unlockedLevels.hard && !achievements.memoryMaster) {
+            achievements.memoryMaster = true;
+            showAchievement('Memory Master', 'Completed all difficulty levels!');
             }
 
-            function checkForMatch() {
-                const isMatch = firstCard.dataset.value === secondCard.dataset.value;
-                isMatch ? handleMatch() : handleMismatch();
+            if (mismatches === 0 && !achievements.perfectGame) {
+            achievements.perfectGame = true;
+            showAchievement('Perfect Game', 'Completed with no mismatched cards!');
             }
+        }
 
-            function handleMatch() {
-                firstCard.removeEventListener('click', flipCard);
-                secondCard.removeEventListener('click', flipCard);
-                
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle-effect';
-                sparkle.style.left = `${firstCard.offsetLeft + firstCard.offsetWidth / 2}px`;
-                sparkle.style.top = `${firstCard.offsetTop + firstCard.offsetHeight / 2}px`;
-                gameBoard.appendChild(sparkle);
+        function showAchievement(title, description) {
+            const achievement = document.createElement('div');
+            achievement.className = 'achievement-notification';
+            achievement.innerHTML = `
+            <div class="achievement-badge">🏆</div>
+            <div class="achievement-text">
+                <h4>${title}</h4>
+                <p>${description}</p>
+            </div>
+            `;
+            document.body.appendChild(achievement);
 
-                setTimeout(() => sparkle.remove(), 1000);
-                matchedPairs++;
-                checkWinCondition();
-                resetBoard();
-            }
+            setTimeout(() => {
+            achievement.classList.add('show');
+            setTimeout(() => {
+                achievement.classList.remove('show');
+                setTimeout(() => achievement.remove(), 500);
+            }, 3000);
+            }, 100);
+        }
 
-            function handleMismatch() {
-                lockBoard = true;
-                setTimeout(() => {
-                    firstCard.classList.remove('flip');
-                    secondCard.classList.remove('flip');
-                    resetBoard();
-                }, 1000);
-            }
-
-            function resetBoard() {
-                [hasFlippedCard, lockBoard] = [false, false];
-                [firstCard, secondCard] = [null, null];
-            }
-
-            function updateStats() {
-                movesDisplay.textContent = moves;
-            }
-
-            function checkWinCondition() {
-                if (matchedPairs === cards.length / 2) {
-                    clearInterval(timer);
-
-                    // Update leaderboard
-                    if (moves < leaderboard[currentLevel].moves || (moves === leaderboard[currentLevel].moves && seconds < leaderboard[currentLevel].time)) {
-                        leaderboard[currentLevel].moves = moves;
-                        leaderboard[currentLevel].time = seconds;
-                        saveHighScores();
-                        showHighScoreMessage(moves, seconds);
-                    }
-
-                    // Check achievements
-                    checkAchievements();
-
-                    // Unlock next level
-                    if (currentLevel === 'easy' && !unlockedLevels.medium) {
-                        unlockedLevels.medium = true;
-                        updateLevelButtonStates();
-                    } else if (currentLevel === 'medium' && !unlockedLevels.hard) {
-                        unlockedLevels.hard = true;
-                        updateLevelButtonStates();
-                    }
-
-                    celebrateWin();
-                }
-            }
-
-            function showHighScoreMessage(score, time) {
-                const message = document.createElement('div');
-                message.className = 'highscore-message';
-                message.textContent = `New High Score for ${currentLevel} level: ${score} moves, ${time}s!`;
-                gameBoard.parentNode.insertBefore(message, gameBoard.nextSibling);
-                setTimeout(() => message.remove(), 3000);
-            }
-
-            function checkAchievements() {
-                if (seconds < 60 && !achievements.speedDemon) {
-                    achievements.speedDemon = true;
-                    showAchievement('Speed Demon', 'Completed a game in under 60 seconds!');
-                }
-
-                if (unlockedLevels.hard && !achievements.memoryMaster) {
-                    achievements.memoryMaster = true;
-                    showAchievement('Memory Master', 'Completed all difficulty levels!');
-                }
-
-                if (moves <= 2 * (cards.length / 2) && !achievements.perfectGame) {
-                    achievements.perfectGame = true;
-                    showAchievement('Perfect Game', 'Completed with no mismatched cards!');
-                }
-            }
-
-            function showAchievement(title, description) {
-                const achievement = document.createElement('div');
-                achievement.className = 'achievement-notification';
-                achievement.innerHTML = `
-                    <div class="achievement-badge">🏆</div>
-                    <div class="achievement-text">
-                        <h4>${title}</h4>
-                        <p>${description}</p>
-                    </div>
-                `;
-                document.body.appendChild(achievement);
-
-                setTimeout(() => {
-                    achievement.classList.add('show');
-                    setTimeout(() => {
-                        achievement.classList.remove('show');
-                        setTimeout(() => achievement.remove(), 500);
-                    }, 3000);
-                }, 100);
-            }
-
-            // Theme switching
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('theme-btn')) {
-                    currentTheme = e.target.dataset.theme;
-                    document.querySelectorAll('.theme-btn').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    e.target.classList.add('active');
-
-                    if (currentLevel) {
-                        startGame(levels[currentLevel]);
-                    }
-                }
-            });
-
-            function removeCelebration() {
-                const existingCelebration = document.querySelector('.celebration');
-                const existingMessage = document.querySelector('.win-message');
-                if (existingCelebration) existingCelebration.remove();
-                if (existingMessage) existingMessage.remove();
-            }
-
-            function celebrateWin() {
-                const celebration = document.createElement('div');
-                celebration.className = 'celebration';
-
-                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-                for (let i = 0; i < 150; i++) {
-                    const element = document.createElement('div');
-                    if (i < 50) {
-                        element.className = 'balloon';
-                        element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                        element.style.animationDuration = `${4 + Math.random() * 3}s`;
-                    } else {
-                        element.className = 'confetti';
-                        element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                        element.style.animationDuration = `${2 + Math.random() * 3}s`;
-                        element.style.width = `${5 + Math.random() * 10}px`;
-                        element.style.height = `${5 + Math.random() * 10}px`;
-                    }
-                    element.style.left = `${Math.random() * 100}%`;
-                    celebration.appendChild(element);
-                }
-
-                const messages = [
-                    "Amazing! 🎉", "Memory Master! 🏆", "Incredible! 👏",
-                    "Perfect! 🧠", "You nailed it! 💯", "Congratulations! 🎊",
-                ];
-
-                const winMessage = document.createElement('div');
-                winMessage.className = 'win-message';
-                winMessage.innerHTML = `
-                    <h3>${messages[Math.floor(Math.random() * messages.length)]}</h3>
-                    <p>Completed in ${moves} moves and ${seconds} seconds!</p>
-                    <div class="leaderboard">
-                        <h4>Best Scores</h4>
-                        <p>Easy: ${leaderboard.easy.moves === Infinity ? '-' : `${leaderboard.easy.moves} moves, ${leaderboard.easy.time}s`}</p>
-                        <p>Medium: ${leaderboard.medium.moves === Infinity ? '-' : `${leaderboard.medium.moves} moves, ${leaderboard.medium.time}s`}</p>
-                        <p>Hard: ${leaderboard.hard.moves === Infinity ? '-' : `${leaderboard.hard.moves} moves, ${leaderboard.hard.time}s`}</p>
-                    </div>
-                    <div class="win-options">
-                        <button class="btn play-again">Play Again</button>
-                        <button class="btn return-home">New Game</button>
-                    </div>
-                `;
-
-                document.body.append(celebration, winMessage);
-
-                document.querySelector('.play-again').addEventListener('click', () => {
-                    removeCelebration();
-                    startGame(levels[currentLevel]);
-                });
-
-                document.querySelector('.return-home').addEventListener('click', () => {
-                    removeCelebration();
-                    resetGameState();
-                });
-            }
-
-            function resetGameState() {
-                clearInterval(timer);
-                gameBoard.innerHTML = '';
-                cards = [];
-                hasFlippedCard = lockBoard = false;
-                firstCard = secondCard = null;
-                moves = seconds = matchedPairs = 0;
-                currentLevel = null;
-                movesDisplay.textContent = '0';
-                timeDisplay.textContent = '0';
-                updateHighScoreDisplay();
+        // Theme switching
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('theme-btn')) {
+            currentTheme = e.target.dataset.theme;
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            if (currentLevel) startGame(levels[currentLevel]);
             }
         });
-    </script>
+
+        function removeCelebration() {
+            document.querySelectorAll('.celebration, .win-message').forEach(el => el.remove());
+        }
+
+        function celebrateWin() {
+            const winMessage = document.createElement('div');
+            winMessage.className = 'win-message';
+            winMessage.innerHTML = `
+            <h3>🎉 You Won!</h3>
+            <p>Completed in ${moves} moves and ${seconds} seconds!</p>
+            <div class="leaderboard">
+                <h4>Best Scores</h4>
+                <p>Easy: ${leaderboard.easy.moves === Infinity ? '-' : `${leaderboard.easy.moves} moves, ${leaderboard.easy.time}s`}</p>
+                <p>Medium: ${leaderboard.medium.moves === Infinity ? '-' : `${leaderboard.medium.moves} moves, ${leaderboard.medium.time}s`}</p>
+                <p>Hard: ${leaderboard.hard.moves === Infinity ? '-' : `${leaderboard.hard.moves} moves, ${leaderboard.hard.time}s`}</p>
+            </div>
+            <div class="win-options">
+                <button class="btn play-again">Play Again</button>
+                <button class="btn return-home">New Game</button>
+            </div>
+            `;
+            document.body.appendChild(winMessage);
+
+            document.querySelector('.play-again').addEventListener('click', () => {
+            removeCelebration();
+            startGame(levels[currentLevel]);
+            });
+
+            document.querySelector('.return-home').addEventListener('click', () => {
+            removeCelebration();
+            resetGameState();
+            });
+        }
+
+        function resetGameState() {
+            clearInterval(timer);
+            gameBoard.innerHTML = '';
+            cards = [];
+            hasFlippedCard = lockBoard = false;
+            firstCard = secondCard = null;
+            moves = seconds = matchedPairs = mismatches = 0;
+            movesDisplay.textContent = '0';
+            timeDisplay.textContent = '0';
+            updateHighScoreDisplay();
+        }
+    });
+  </script>
 </body>
 </html>
