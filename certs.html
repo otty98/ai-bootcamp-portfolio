@@ -113,6 +113,7 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             justify-items: center;
+            align-items: start;
         }
 
         .cert-item {
@@ -125,6 +126,7 @@
             width: 100%;
             max-width: 350px;
             height: 250px;
+            text-decoration: none;
         }
 
         .cert-item img {
@@ -142,6 +144,42 @@
 
         .cert-item:hover img {
             transform: scale(1.05);
+        }
+
+        /* PDF preview: embed first page in a tile like image certs (iframe; clicks open <a href>) */
+        .cert-item.cert-pdf {
+            position: relative;
+            padding: 0;
+            background: #0b1220;
+        }
+
+        .cert-item.cert-pdf .cert-pdf-preview {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cert-item.cert-pdf iframe {
+            width: 100%;
+            height: 145%;
+            min-height: 320px;
+            border: none;
+            transform: translateY(-6%);
+            transform-origin: top center;
+            transition: transform 0.35s ease;
+            pointer-events: none;
+        }
+
+        .cert-item.cert-pdf:hover iframe {
+            transform: translateY(-6%) scale(1.04);
+        }
+
+        .cert-pdf-overlay-link {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: inherit;
         }
 
         /* Class to hide certificates */
@@ -163,6 +201,11 @@
             .cert-item {
                 height: 200px;
             }
+
+            .cert-item.cert-pdf iframe {
+                min-height: 280px;
+                height: 155%;
+            }
             
             .filter-btn {
                 padding: 0.6rem 1.2rem;
@@ -179,10 +222,15 @@
             .certs-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .cert-item {
                 max-width: 100%;
                 height: 180px;
+            }
+
+            .cert-item.cert-pdf iframe {
+                min-height: 250px;
+                height: 160%;
             }
             
             .cert-filters {
@@ -310,54 +358,62 @@
                     <img src="professional-dev/Write Prof Email-page-00001.jpg" alt="Professional Development Cert">
                 </a>
 
-                <!-- Software Dev Certs -->
-                <a href="freecodecamp/Screenshot (33).png" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="freecodecamp/Screenshot (33).png" alt="Software Development Cert">
+                <!-- Software Dev: PDFs use embedded preview (same tile size as image certs); click opens full PDF -->
+                <a href="freecodecamp/Screenshot%20(33).png" class="cert-item" data-category="software-development" target="_blank" rel="noopener noreferrer">
+                    <img src="freecodecamp/Screenshot%20(33).png" alt="freeCodeCamp certificate thumbnail">
                 </a>
-                <a href="fnb/IMG_6582.jpeg" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="fnb/IMG_6582.jpeg" alt="Software Development Cert">
+                <a href="fnb/IMG_6582.jpeg" class="cert-item" data-category="software-development" target="_blank" rel="noopener noreferrer">
+                    <img src="fnb/IMG_6582.jpeg" alt="FNB Academy certificate">
                 </a>
-                <a href="capaciti/Owethu Peyane-210330182.jpg" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Owethu Peyane-210330182.jpg" alt="Software Development Cert">
+                <a href="capaciti/Owethu%20Peyane-210330182.jpg" class="cert-item" data-category="software-development" target="_blank" rel="noopener noreferrer">
+                    <img src="capaciti/Owethu%20Peyane-210330182.jpg" alt="CAPACITI certificate">
                 </a>
+                <a href="capaciti/IBM%20Intro%20to%20DevOps.jpg" class="cert-item" data-category="software-development" target="_blank" rel="noopener noreferrer">
+                    <img src="capaciti/IBM%20Intro%20to%20DevOps.jpg" alt="IBM DevOps certificate">
                 </a>
-                <a href="capaciti/IBM Intro to DevOps.jpg" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/IBM Intro to DevOps.jpg" alt="Software Development Cert">
+                <a href="capaciti/IBM%20Intro%20to%20Software%20Engineering_page-0001.jpg" class="cert-item" data-category="software-development" target="_blank" rel="noopener noreferrer">
+                    <img src="capaciti/IBM%20Intro%20to%20Software%20Engineering_page-0001.jpg" alt="IBM software engineering certificate">
                 </a>
-                </a>
-                <a href="capaciti/IBM Intro to Software Engineering_page-0001.jpg" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/IBM Intro to Software Engineering_page-0001.jpg" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/App Development using Microservices & Serveless.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/App Development using Microservices & Serveless.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/Back-End with Nodejs and Express.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Back-End with Nodejs and Express.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/Coursera D0LE0OGAHZB0.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Coursera D0LE0OGAHZB0.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/Developing AI Apps with Python&Flask.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Developing AI Apps with Python&Flask.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/Django App Dev withSQL and Databases.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Django App Dev withSQL and Databases.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/full-stack development assessment.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/full-stack development assessment.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/FullStack-Project Capstone.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/FullStack-Project Capstone.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/GenAI elevate your SOFDev Career.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/GenAI elevate your SOFDev Career.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/Getting started with Git and GitHub.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Getting started with Git and GitHub.pdf" alt="Software Development Cert">
-                </a>
-                <a href="capaciti/Intro to Cloud Computing.pdf" class="cert-item" data-category="software-development" target="_blank">
-                    <img src="capaciti/Intro to Cloud Computing.pdf" alt="Software Development Cert">
-                </a>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/App%20Development%20using%20Microservices%20%26%20Serveless.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/App%20Development%20using%20Microservices%20%26%20Serveless.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="App Development using Microservices and Serverless, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/Back-End%20with%20Nodejs%20and%20Express.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/Back-End%20with%20Nodejs%20and%20Express.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Back-End with Node.js and Express, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/Coursera%20D0LE0OGAHZB0.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/Coursera%20D0LE0OGAHZB0.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Coursera certificate, PDF"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/Developing%20AI%20Apps%20with%20Python%26Flask.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/Developing%20AI%20Apps%20with%20Python%26Flask.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Developing AI Apps with Python and Flask, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/Django%20App%20Dev%20withSQL%20and%20Databases.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/Django%20App%20Dev%20withSQL%20and%20Databases.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Django app development with SQL and databases, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/full-stack%20development%20assessment.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/full-stack%20development%20assessment.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Full-stack development assessment, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/FullStack-Project%20Capstone.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/FullStack-Project%20Capstone.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Full-stack project capstone, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/GenAI%20elevate%20your%20SOFDev%20Career.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/GenAI%20elevate%20your%20SOFDev%20Career.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="GenAI for software development career, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/Getting%20started%20with%20Git%20and%20GitHub.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/Getting%20started%20with%20Git%20and%20GitHub.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Getting started with Git and GitHub, PDF certificate"></a>
+                </div>
+                <div class="cert-item cert-pdf" data-category="software-development">
+                    <span class="cert-pdf-preview"><iframe src="capaciti/Intro%20to%20Cloud%20Computing.pdf#toolbar=0" title="Certificate preview" loading="lazy" tabindex="-1"></iframe></span>
+                    <a href="capaciti/Intro%20to%20Cloud%20Computing.pdf" class="cert-pdf-overlay-link" target="_blank" rel="noopener noreferrer" aria-label="Introduction to cloud computing, PDF certificate"></a>
+                </div>
 
                 </div>
         </div>
