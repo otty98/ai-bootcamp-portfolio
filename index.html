@@ -44,10 +44,17 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Full Stack & AI Developer</h1>
-                <h2>Building Intelligent Software Solutions</h2>
-                <p>Passionate about creating innovative technology solutions that bridge AI/ML with practical software development.</p>
-                <p class="hero-tagline">Open to full-stack and AI-focused roles | TypeScript, .NET, Python | South Africa / remote</p>
+                <h1>Full-Stack Software Developer</h1>
+
+                <h2>Building Enterprise Software & AI-Powered Solutions</h2>
+
+                <p>
+                I design and develop scalable enterprise applications using .NET, Angular, and AI technologies, delivering secure, reliable, and user-focused software solutions.
+                </p>
+
+                <p class="hero-tagline">
+                Open to Software Developer, Backend, Frontend roles | Johannesburg, South Africa | Remote & Hybrid
+                </p>
                 <div class="hero-buttons">
                     <a href="documents/Owethu Ndamkele Peyane - CV.pdf" class="btn btn-primary" download>Download CV</a>
                     <a href="documents/Owethu Ndamkele Peyane - CV.pdf" class="btn btn-secondary" target="_blank">View CV</a>
@@ -77,20 +84,14 @@
                     </p>
                     <div class="skills-grid">
                         <div class="skill-tag">.NET</div>
+                        <div class="skill-tag">Angular</div>
                         <div class="skill-tag">Python</div>
                         <div class="skill-tag">Java</div>
-                        <div class="skill-tag">JavaScript<wbr>/TypeScript</div>
                         <div class="skill-tag">HTML/CSS</div>
-                        <div class="skill-tag">WebSockets (Java & SignalR)</div>
-                        <div class="skill-tag">Angular</div>
                         <div class="skill-tag">MySQL & PostgreSQL</div>
                         <div class="skill-tag">Git</div>
                         <div class="skill-tag">Generative AI</div>
                         <div class="skill-tag">Machine Learning (ML)</div>
-                        <div class="skill-tag">AI Ethics</div>
-                        <div class="skill-tag">Prompt Engineering</div>
-
-                    </div>
                     <a href="#learning" class="scroll-down-link">
                         <div class="scroll-down-arrow">
                             &darr;
@@ -107,9 +108,9 @@
                 <h2 class="animated-heading section-title">What I am Currently Learning</h2>
                 <p>I'm always expanding my skills to stay at the forefront of technology. Here are some of the topics I am currently exploring and practicing with:</p>
                 <div class="skills-grid">
-                    <div class="skill-tag">.NET</div>
-                    <div class="skill-tag">Docker (IBM)</div>
-                    <div class="skill-tag">Data Engineering (WeThinkCode_)</div>
+                    <div class="skill-tag">CI/CD</div>
+                    <div class="skill-tag">Docker</div>
+                    <div class="skill-tag">Cloud Tecnologies</div>
                 </div>
             </div>
             <a href="#game-invite" class="scroll-down-link">
@@ -141,8 +142,8 @@
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="client">Client work</button>
                 <button class="filter-btn" data-filter="ai">AI/ML</button>
-                <button class="filter-btn" data-filter="software">Personal</button>
-                <button class="filter-btn" data-filter="fnb">FNB Academy</button>
+                <!-- <button class="filter-btn" data-filter="software">Personal</button>
+                <button class="filter-btn" data-filter="fnb">FNB Academy</button> -->
                 <button class="filter-btn" data-filter="all">All projects</button>
             </div>
 
@@ -159,6 +160,48 @@
 
             <div class="projects-grid">
                 <!-- Client / commercial work -->
+                <div class="project-card" data-category="client">
+                    <div class="project-image-carousel" data-project-carousel tabindex="0" aria-roledescription="carousel" aria-label="eGuardBook product screenshots">
+                        <div class="project-image-carousel-viewport">
+                            <ul class="project-image-carousel-track" data-carousel-track>
+                                <li data-carousel-slide><img src="eGuardbook/guardscreen.png" alt="eGuardBook — Guard incident logging" width="400" height="220" loading="eager" fetchpriority="high"></li>
+                                <li data-carousel-slide><img src="eGuardbook/whatyouneed.png" alt="eGuardBook — What you need" width="400" height="220" loading="lazy"></li>
+                                <li data-carousel-slide><img src="eGuardbook/roles.png" alt="eGuardBook — Roles" width="400" height="220" loading="lazy"></li>
+                                <li data-carousel-slide><img src="eGuardbook/superadmin.png" alt="eGuardBook — Super admin" width="400" height="220" loading="lazy"></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="project-image-carousel-btn project-image-carousel-btn--prev" data-carousel-prev aria-label="Previous screenshot">&#8249;</button>
+                        <button type="button" class="project-image-carousel-btn project-image-carousel-btn--next" data-carousel-next aria-label="Next screenshot">&#8250;</button>
+                        <div class="project-image-carousel-dots" role="tablist" aria-label="Screenshots">
+                            <button type="button" class="project-image-carousel-dot is-active" data-carousel-dot role="tab" aria-selected="true" aria-label="Guard screen"></button>
+                            <button type="button" class="project-image-carousel-dot" data-carousel-dot role="tab" aria-selected="false" aria-label="Overview"></button>
+                            <button type="button" class="project-image-carousel-dot" data-carousel-dot role="tab" aria-selected="false" aria-label="Roles"></button>
+                            <button type="button" class="project-image-carousel-dot" data-carousel-dot role="tab" aria-selected="false" aria-label="Admin"></button>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Enterprise Operations Board (EOB)</h3>
+                        <p>
+                            A production-ready enterprise platform that digitizes operational workflows for security companies.
+                            Guards can log incidents in real time, supervisors monitor field activity, and administrators manage
+                            sites, personnel, shifts, and role-based access through a secure centralized system. Designed for
+                            reliability, auditability, and efficient day-to-day operations.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Angular</span>
+                            <span class="project-tag">.NET</span>
+                            <span class="project-tag">PostgreSQL</span>
+                            <span class="project-tag">REST API</span>
+                            <span class="project-tag">JWT Authentication</span>
+                            <span class="project-tag">Role-Based Access</span>
+                            <span class="project-tag">Capacitor</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://eobook.co.za/" class="project-link" target="_blank" rel="noopener noreferrer">Live site</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="project-card" data-category="client">
                     <div class="project-image-carousel" data-project-carousel tabindex="0" aria-roledescription="carousel" aria-label="Kamgabaza IT Solutions website screenshots">
                         <div class="project-image-carousel-viewport">
@@ -184,48 +227,14 @@
                     </div>
                     <div class="project-content">
                         <h3>Kamgabaza IT Solutions</h3>
-                        <p>Public website for <a href="https://kamgabaza.co.za/" target="_blank" rel="noopener noreferrer" class="project-inline-link">Kamgabaza Solutions</a> — IT services, web presence, QA, and mobile apps for growing businesses (client project).</p>
+                        <p>Public website for Kamgabaza Solutions</a> — IT services, web presence, QA, and mobile apps for growing businesses.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Client</span>
-                            <span class="project-tag">Web</span>
-                            <span class="project-tag">IT services</span>
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
                         </div>
                         <div class="project-links">
                             <a href="https://kamgabaza.co.za/" class="project-link" target="_blank" rel="noopener noreferrer">Live site</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-category="client">
-                    <div class="project-image-carousel" data-project-carousel tabindex="0" aria-roledescription="carousel" aria-label="eGuardBook product screenshots">
-                        <div class="project-image-carousel-viewport">
-                            <ul class="project-image-carousel-track" data-carousel-track>
-                                <li data-carousel-slide><img src="eGuardbook/guardscreen.png" alt="eGuardBook — Guard incident logging" width="400" height="220" loading="eager" fetchpriority="high"></li>
-                                <li data-carousel-slide><img src="eGuardbook/whatyouneed.png" alt="eGuardBook — What you need" width="400" height="220" loading="lazy"></li>
-                                <li data-carousel-slide><img src="eGuardbook/roles.png" alt="eGuardBook — Roles" width="400" height="220" loading="lazy"></li>
-                                <li data-carousel-slide><img src="eGuardbook/superadmin.png" alt="eGuardBook — Super admin" width="400" height="220" loading="lazy"></li>
-                            </ul>
-                        </div>
-                        <button type="button" class="project-image-carousel-btn project-image-carousel-btn--prev" data-carousel-prev aria-label="Previous screenshot">&#8249;</button>
-                        <button type="button" class="project-image-carousel-btn project-image-carousel-btn--next" data-carousel-next aria-label="Next screenshot">&#8250;</button>
-                        <div class="project-image-carousel-dots" role="tablist" aria-label="Screenshots">
-                            <button type="button" class="project-image-carousel-dot is-active" data-carousel-dot role="tab" aria-selected="true" aria-label="Guard screen"></button>
-                            <button type="button" class="project-image-carousel-dot" data-carousel-dot role="tab" aria-selected="false" aria-label="Overview"></button>
-                            <button type="button" class="project-image-carousel-dot" data-carousel-dot role="tab" aria-selected="false" aria-label="Roles"></button>
-                            <button type="button" class="project-image-carousel-dot" data-carousel-dot role="tab" aria-selected="false" aria-label="Admin"></button>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>eGuardBook</h3>
-                        <p>Electronic occurrence book for <strong>security companies</strong>: guards log incidents on shift, supervisors review activity, and admins configure sites, roles, and workflows. Built for reliable field use and audit trails.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">.NET</span>
-                            <span class="project-tag">PostgreSQL</span>
-                            <span class="project-tag">Angular</span>
-                            <span class="project-tag">Capacitor</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://eobook.co.za/" class="project-link" target="_blank" rel="noopener noreferrer">Live site</a>
                         </div>
                     </div>
                 </div>
@@ -306,6 +315,7 @@
                 </div>
 
                 <!-- Software Projects -->
+                <!--
                 <div class="project-card" data-category="software">
                     <img src="images/flowerrrrr.jpg" alt="Bloom and Blossom flower store" class="project-image" width="400" height="220" loading="lazy">
                     <div class="project-content">
@@ -339,8 +349,10 @@
                         </div>
                     </div>
                 </div>
+                -->
 
                 <!-- FNB Academy Projects -->
+                <!--
                 <div class="project-card" data-category="fnb">
                     <img src="images/calculator2.png" alt="Calculator app" class="project-image" width="400" height="220" loading="lazy">
                     <div class="project-content">
@@ -374,6 +386,7 @@
                         </div>
                     </div>
                 </div>
+                -->
             </div>
         </div>
     </section>
